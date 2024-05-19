@@ -30,3 +30,8 @@ button:hover {
   background-color: grey;
   color: white;
 }
+
+
+.game--board {
+  display: none;
+}

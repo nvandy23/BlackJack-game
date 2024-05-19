@@ -4,12 +4,28 @@ const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', '
 const originalDeck = buildOriginalDeck();
 // renderDeckInContainer(originalDeck, document.getElementById('original-deck-container'));
 let shuffledDeck;
-
-console.log("test")
-
-
-
+const startButton = document.querySelector('#start--button')
+const startScreenContainer = document.querySelector("#start--screen--container")
+const gameBoardContainer = document.querySelector('#game--board--container');
 const shuffledContainer = document.getElementById('shuffled-deck-container');
+
+
+// start game
+function startGame () {
+  startScreenContainer.style.display = 'none';
+  gameBoardContainer.style.display = 'block';
+
+}
+
+startButton.addEventListener('click',startGame)
+
+
+
+
+
+
+
+
 
 
 // document.querySelector('button').addEventListener('click', renderNewShuffledDeck);
