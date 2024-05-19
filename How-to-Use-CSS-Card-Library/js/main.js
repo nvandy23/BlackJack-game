@@ -5,9 +5,10 @@ const originalDeck = buildOriginalDeck();
 // renderDeckInContainer(originalDeck, document.getElementById('original-deck-container'));
 let shuffledDeck;
 const startButton = document.querySelector('#start--button')
-const startScreenContainer = document.querySelector("#start--screen--container")
+const startScreenContainer = document.querySelector("#start--screen--container");
 const gameBoardContainer = document.querySelector('#game--board--container');
 const shuffledContainer = document.getElementById('shuffled-deck-container');
+const playerHandContainer =document.querySelector('#player--hand--container');
 const playerHand =[]
 const compHand =[]
 const playerScore = 0
@@ -19,14 +20,11 @@ let compCard2
 
 // start game
 function startGame() {
-  startScreenContainer.style.display = 'none';
-  gameBoardContainer.style.display = 'block';
-  playerCard1 = shuffledDeck.pop()
-  playerCard2 = shuffledDeck.shift()
-  compCard1 = shuffledDeck.pop()
-  compCard2 = shuffledDeck.shift()
-  playerHand.push(playerCard1,playerCard2)
-  compHand.push(compCard1,compCard2)
+startScreenContainer.style.display = 'none';
+gameBoardContainer.style.display = 'block';
+ getHands()
+
+
 
 
   // return playerCards
@@ -40,6 +38,18 @@ console.log(compHand)
   
 
 }
+
+
+
+function getHands() {
+playerCard1 = shuffledDeck.pop()
+playerCard2 = shuffledDeck.shift()
+compCard1 = shuffledDeck.pop()
+compCard2 = shuffledDeck.shift()
+playerHand.push(playerCard1,playerCard2)
+compHand.push(compCard1,compCard2)
+}
+
 startButton.addEventListener('click', startGame);
 
 
