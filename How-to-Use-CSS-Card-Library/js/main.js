@@ -12,15 +12,31 @@ const playerHand =[]
 const compHand =[]
 const playerScore = 0
 const compScore = 0
-
+let playerCard1
+let playerCard2
+let compCard1
+let compCard2
 
 // start game
-function startGame () {
+function startGame() {
   startScreenContainer.style.display = 'none';
   gameBoardContainer.style.display = 'block';
-}
+  playerCard1 = shuffledDeck.pop()
+  playerCard2 = shuffledDeck.shift()
+  compCard1 = shuffledDeck.pop()
+  compCard2 = shuffledDeck.shift()
+  // return playerCards
+console.log(playerCard1)
+console.log(playerCard2)
+console.log(compCard1)
+console.log (compCard2)
 
-startButton.addEventListener('click',startGame)
+  
+
+}
+startButton.addEventListener('click', startGame);
+
+
 
 
 
