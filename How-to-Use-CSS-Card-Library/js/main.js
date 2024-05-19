@@ -8,13 +8,16 @@ const startButton = document.querySelector('#start--button')
 const startScreenContainer = document.querySelector("#start--screen--container")
 const gameBoardContainer = document.querySelector('#game--board--container');
 const shuffledContainer = document.getElementById('shuffled-deck-container');
+const playerHand =[]
+const compHand =[]
+const playerScore = 0
+const compScore = 0
 
 
 // start game
 function startGame () {
   startScreenContainer.style.display = 'none';
   gameBoardContainer.style.display = 'block';
-
 }
 
 startButton.addEventListener('click',startGame)
@@ -40,6 +43,7 @@ function getNewShuffledDeck() {
   return newShuffledDeck;
 }
 
+console.log(getNewShuffledDeck())
 function renderNewShuffledDeck() {
   shuffledDeck = getNewShuffledDeck();
   // renderDeckInContainer(shuffledDeck, shuffledContainer);
@@ -66,5 +70,5 @@ function buildOriginalDeck() {
   });
   return deck;
 }
-
+console.log(buildOriginalDeck())
 renderNewShuffledDeck();
