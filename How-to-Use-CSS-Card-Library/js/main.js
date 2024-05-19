@@ -25,11 +25,17 @@ function startGame() {
   playerCard2 = shuffledDeck.shift()
   compCard1 = shuffledDeck.pop()
   compCard2 = shuffledDeck.shift()
+  playerHand.push(playerCard1,playerCard2)
+  compHand.push(compCard1,compCard2)
+
+
   // return playerCards
 console.log(playerCard1)
 console.log(playerCard2)
 console.log(compCard1)
 console.log (compCard2)
+console.log(playerHand)
+console.log(compHand)
 
   
 
