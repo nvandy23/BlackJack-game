@@ -2,66 +2,57 @@
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const originalDeck = buildOriginalDeck();
-// renderDeckInContainer(originalDeck, document.getElementById('original-deck-container'));
-let shuffledDeck;
 const startButton = document.querySelector('#start--button')
 const startScreenContainer = document.querySelector("#start--screen--container");
 const gameBoardContainer = document.querySelector('#game--board--container');
 const shuffledContainer = document.getElementById('shuffled-deck-container');
-const playerHandContainer =document.querySelector('#player--hand--container');
+const playerHandContainer = document.querySelector('#player--hand--container');
+const dealerHandContainer = document.querySelector('#dealer--hand--container');
 const playerHand =[]
-const compHand =[]
+const dealerHand =[]
 const playerScore = 0
-const compScore = 0
+const dealerScore = 0
 let playerCard1
 let playerCard2
-let compCard1
-let compCard2
+let dealerCard1
+let dealerCard2
+let shuffledDeck;
+
+
 
 // start game
 function startGame() {
 startScreenContainer.style.display = 'none';
 gameBoardContainer.style.display = 'block';
- getHands()
-
-
-
-
-  // return playerCards
+ getPlayerHand()
+ getDealerHand()
 console.log(playerCard1)
 console.log(playerCard2)
-console.log(compCard1)
-console.log (compCard2)
+console.log(dealerCard1)
+console.log (dealerCard2)
 console.log(playerHand)
-console.log(compHand)
-
-  
-
-}
-
-
-
-function getHands() {
-playerCard1 = shuffledDeck.pop()
-playerCard2 = shuffledDeck.shift()
-compCard1 = shuffledDeck.pop()
-compCard2 = shuffledDeck.shift()
-playerHand.push(playerCard1,playerCard2)
-compHand.push(compCard1,compCard2)
+console.log(dealerHand)
 }
 
 startButton.addEventListener('click', startGame);
 
+// get and return player hand. Render hand in container.
+function getPlayerHand() {
+playerCard1 = shuffledDeck.pop()
+playerCard2 = shuffledDeck.shift()
+playerHand.push(playerCard1,playerCard2)
+renderDeckInContainer(playerHand,playerHandContainer);
+return playerHand
+}
 
-
-
-
-
-
-
-
-
-
+// get and return dealer hand. Render hand in container.
+function getDealerHand () {
+dealerCard1 = shuffledDeck.pop()
+dealerCard2 = shuffledDeck.shift()
+dealerHand.push(dealerCard1, dealerCard2)
+renderDeckInContainer(dealerHand,dealerHandContainer);
+return dealerHand
+}
 
 // document.querySelector('button').addEventListener('click', renderNewShuffledDeck);
 
@@ -81,14 +72,14 @@ function renderNewShuffledDeck() {
   // renderDeckInContainer(shuffledDeck, shuffledContainer);
 }
 
-// function renderDeckInContainer(deck, container) {
-//   container.innerHTML = '';
-//   let cardsHtml = '';
-//   deck.forEach(function(card) {
-//     cardsHtml += `<div class="card ${card.face}"></div>`;
-//   });
-//   container.innerHTML = cardsHtml;
-// }
+function renderDeckInContainer(deck, container) {
+  container.innerHTML = '';
+  let cardsHtml = '';
+  deck.forEach(function(card) {
+    cardsHtml += `<div class="card ${card.face}"></div>`;
+  });
+  container.innerHTML = cardsHtml;
+}
 
 function buildOriginalDeck() {
   const deck = [];
