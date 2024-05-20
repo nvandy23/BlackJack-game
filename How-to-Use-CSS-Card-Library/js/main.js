@@ -10,13 +10,13 @@ const playerHandContainer = document.querySelector('#player--hand--container');
 const dealerHandContainer = document.querySelector('#dealer--hand--container');
 const playerHand =[]
 const dealerHand =[]
-const playerScore = 0
-const dealerScore = 0
+let playerScore 
+let dealerScore 
 let playerCard1
 let playerCard2
 let dealerCard1
 let dealerCard2
-let shuffledDeck;
+let shuffledDeck
 
 
 
@@ -26,6 +26,8 @@ startScreenContainer.style.display = 'none';
 gameBoardContainer.style.display = 'block';
  getPlayerHand()
  getDealerHand()
+
+
 console.log(playerCard1)
 console.log(playerCard2)
 console.log(dealerCard1)
@@ -41,7 +43,7 @@ function getPlayerHand() {
 playerCard1 = shuffledDeck.pop()
 playerCard2 = shuffledDeck.shift()
 playerHand.push(playerCard1,playerCard2)
-renderDeckInContainer(playerHand,playerHandContainer);
+renderCardsInContainer(playerHand,playerHandContainer);
 return playerHand
 }
 
@@ -50,11 +52,9 @@ function getDealerHand () {
 dealerCard1 = shuffledDeck.pop()
 dealerCard2 = shuffledDeck.shift()
 dealerHand.push(dealerCard1, dealerCard2)
-renderDeckInContainer(dealerHand,dealerHandContainer);
+renderCardsInContainer(dealerHand,dealerHandContainer);
 return dealerHand
 }
-
-// document.querySelector('button').addEventListener('click', renderNewShuffledDeck);
 
 function getNewShuffledDeck() {
   const tempDeck = [...originalDeck];
@@ -69,10 +69,9 @@ function getNewShuffledDeck() {
 console.log(getNewShuffledDeck())
 function renderNewShuffledDeck() {
   shuffledDeck = getNewShuffledDeck();
-  // renderDeckInContainer(shuffledDeck, shuffledContainer);
 }
 
-function renderDeckInContainer(deck, container) {
+function renderCardsInContainer(deck, container) {
   container.innerHTML = '';
   let cardsHtml = '';
   deck.forEach(function(card) {
