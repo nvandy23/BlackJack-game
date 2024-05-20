@@ -100,6 +100,7 @@ dealerCard1 = shuffledDeck.pop()
 dealerCard2 = shuffledDeck.shift()
 dealerHand.push(dealerCard1, dealerCard2)
 renderCardsInContainer(dealerHand,dealerHandContainer);
+// NOT the best way to do this at all. Need to swing back and create a conditional in rendering deck function. DON'T COPY THIS.
 const hiddenCard = dealerHandContainer.firstChild
 hiddenCard.classList.add('card', 'back') 
 return dealerHand
