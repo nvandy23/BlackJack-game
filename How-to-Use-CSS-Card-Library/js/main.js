@@ -20,6 +20,53 @@ let shuffledDeck
 
 
 
+
+
+// build original deck 
+function buildOriginalDeck() {
+  const deck = [];
+  suits.forEach(function(suit) {
+    ranks.forEach(function(rank) {
+      deck.push({
+        face: `${suit}${rank}`,
+        value: Number(rank) || (rank === 'A' ? 11 : 10)
+      });
+    });
+  });
+  return deck;
+}
+
+//setup render player and dealer hand container function 
+function renderCardsInContainer(deck, container) {
+  container.innerHTML = '';
+  let cardsHtml = '';
+  deck.forEach(function(card) {
+    cardsHtml += `<div class="card ${card.face}"></div>`;
+  });
+  container.innerHTML = cardsHtml;
+}
+
+// get new shuffled Deck
+function getNewShuffledDeck() {
+  const tempDeck = [...originalDeck];
+  const newShuffledDeck = [];
+  while (tempDeck.length) {
+    const rndIdx = Math.floor(Math.random() * tempDeck.length);
+    newShuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
+  }
+  return newShuffledDeck;
+}
+
+console.log(getNewShuffledDeck())
+function renderNewShuffledDeck() {
+shuffledDeck = getNewShuffledDeck();
+}
+
+console.log(buildOriginalDeck())
+renderNewShuffledDeck();
+
+
+
 // start game
 function startGame() {
 startScreenContainer.style.display = 'none';
@@ -53,44 +100,7 @@ dealerCard1 = shuffledDeck.pop()
 dealerCard2 = shuffledDeck.shift()
 dealerHand.push(dealerCard1, dealerCard2)
 renderCardsInContainer(dealerHand,dealerHandContainer);
+const hiddenCard = dealerHandContainer.firstChild
+hiddenCard.classList.add('card', 'back') 
 return dealerHand
 }
-
-function getNewShuffledDeck() {
-  const tempDeck = [...originalDeck];
-  const newShuffledDeck = [];
-  while (tempDeck.length) {
-    const rndIdx = Math.floor(Math.random() * tempDeck.length);
-    newShuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
-  }
-  return newShuffledDeck;
-}
-
-console.log(getNewShuffledDeck())
-function renderNewShuffledDeck() {
-  shuffledDeck = getNewShuffledDeck();
-}
-
-function renderCardsInContainer(deck, container) {
-  container.innerHTML = '';
-  let cardsHtml = '';
-  deck.forEach(function(card) {
-    cardsHtml += `<div class="card ${card.face}"></div>`;
-  });
-  container.innerHTML = cardsHtml;
-}
-
-function buildOriginalDeck() {
-  const deck = [];
-  suits.forEach(function(suit) {
-    ranks.forEach(function(rank) {
-      deck.push({
-        face: `${suit}${rank}`,
-        value: Number(rank) || (rank === 'A' ? 11 : 10)
-      });
-    });
-  });
-  return deck;
-}
-console.log(buildOriginalDeck())
-renderNewShuffledDeck();
