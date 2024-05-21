@@ -8,6 +8,8 @@ const gameBoardContainer = document.querySelector('#game--board--container');
 const shuffledContainer = document.getElementById('shuffled-deck-container');
 const playerHandContainer = document.querySelector('#player--hand--container');
 const dealerHandContainer = document.querySelector('#dealer--hand--container');
+const dealerHandValue = document.querySelector('#dealer--hand--value')
+const playerHandValue = document.querySelector('#player--hand--value')
 const playerHand =[]
 const dealerHand =[]
 let playerScore 
@@ -17,7 +19,8 @@ let playerCard2
 let dealerCard1
 let dealerCard2
 let shuffledDeck
-
+let sum = 0 
+let sum2 = 0
 
 
 
@@ -73,6 +76,18 @@ startScreenContainer.style.display = 'none';
 gameBoardContainer.style.display = 'block';
  getPlayerHand()
  getDealerHand()
+for (const score of playerHand) {
+sum += score.value
+playerHandValue.textContent = sum
+}
+for(const score2 of dealerHand) {
+  sum2 += score2.value
+  dealerHandValue.textContent = sum2
+}
+
+
+
+
 
 
 console.log(playerCard1)
