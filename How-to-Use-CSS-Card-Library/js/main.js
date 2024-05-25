@@ -10,10 +10,13 @@ const playerHandContainer = document.querySelector('#player--hand--container');
 const dealerHandContainer = document.querySelector('#dealer--hand--container');
 const dealerHandValue = document.querySelector('#dealer--hand--value')
 const playerHandValue = document.querySelector('#player--hand--value')
+const playerScoreNum =document.querySelector('#Your--score')
+const dealerScoreNum =document.querySelector('#Dealer--score')
 const playerHand =[]
 const dealerHand =[]
-let playerScore 
-let dealerScore 
+
+let playerScore = 0
+let dealerScore = 0
 let playerCard1
 let playerCard2
 let dealerCard1
@@ -83,6 +86,8 @@ playerHandValue.textContent = sum
 for(const score2 of dealerHand) {
   sum2 += score2.value
   dealerHandValue.textContent = sum2
+  playerScoreNum.textContent = playerScore
+  dealerScoreNum.textContent = dealerScore
 }
 
 
