@@ -20,25 +20,32 @@
 <button>250</button>
 <button>500</button>
 <button>1000</button>
-Enter a  custom amount: <input placeholder ="Min 20 Max 1000">
-
-
-</section>
+Enter a  custom amount: <input placeholder ="Min 20 Max 10000" required>
 <button id ="start--button"> Deposit and Start</button>
+</section>
 </div>
 
-<div class ="game--board" id="game--board--container">
+<section class ="game--board" id="game--board--container">
   <h1>Game screen</h1>
   <h2>Dealer hand value: <span id = "dealer--hand--value"> </span></h2>
   <div class = "dealer--hand" id = "dealer--hand--container"></div>
+  <button>Hit</button>
+<button>Stand</button>
+<button> New Hand</button>
+<button>Cash out </button>
   <h2>Player hand value: <span id = "player--hand--value"> </span></h2>
-  <div class = "player--hand" id="player--hand--container">
-  </div>
-
+  <div class = "player--hand" id="player--hand--container"></div>
 <div class ="game--score" id = "game-score--container"></div>
-<p>Your score: <span id = "Your--score"></span></p>
-<p>Dealer score: <span id ="Dealer--score"></span></p>
-</div>
+<div class ="bets" id = "your--bets--container"></div>
+<button>1</button>
+<button>2</button>
+<button>3</button>
+<button>4</button>
+<input type="range" min="0" max="100" value="50">
+
+
+<p>Your chips remaining: <span id = "Your--chips"></span></p>
+</section>
 
 
 
