@@ -10,10 +10,10 @@ const playerHandContainer = document.querySelector('#player--hand--container');
 const dealerHandContainer = document.querySelector('#dealer--hand--container');
 const dealerHandValue = document.querySelector('#dealer--hand--value')
 const playerHandValue = document.querySelector('#player--hand--value')
-const playerChips =document.querySelector('#Your--chips')
+const playerChips = document.querySelector('#Your--chips')
+const hitButton = document.querySelector('#hit--button')
 const playerHand =[]
 const dealerHand =[]
-
 let playerScore = 0
 let playerCard1
 let playerCard2
@@ -69,7 +69,22 @@ shuffledDeck = getNewShuffledDeck();
 console.log(buildOriginalDeck())
 renderNewShuffledDeck();
 
+// function to show value of player hand
+function showPlayerHandValue () {
+  for (const score of playerHand) {
+    sum += score.value
+    playerHandValue.textContent = sum
+    }
+}
 
+// function to show value of dealer hand
+function showDealerHandValue (){
+  for(const score2 of dealerHand) {
+    sum2 += score2.value
+    dealerHandValue.textContent = sum2
+  
+  }
+}
 
 // start game
 function startGame() {
@@ -77,16 +92,10 @@ startScreenContainer.style.display = 'none';
 gameBoardContainer.style.display = 'block';
  getPlayerHand()
  getDealerHand()
-for (const score of playerHand) {
-sum += score.value
-playerHandValue.textContent = sum
-}
-for(const score2 of dealerHand) {
-  sum2 += score2.value
-  dealerHandValue.textContent = sum2
-  playerChips.textContent = playerScore
+ showPlayerHandValue()
+ showDealerHandValue()
 
-}
+
 
 
 
@@ -123,3 +132,16 @@ const hiddenCard = dealerHandContainer.firstChild
 hiddenCard.classList.add('card', 'back') 
 return dealerHand
 }
+
+// function to get new card for player
+function getAnotherPlayerCard() {
+    const newCard = shuffledDeck.pop();
+    playerHand.push(newCard);
+    renderCardsInContainer(playerHand, playerHandContainer); 
+    console.log(playerHand)
+    showPlayerHandValue()
+  
+}
+
+
+hitButton.addEventListener('click',getAnotherPlayerCard)
