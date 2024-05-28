@@ -16,6 +16,7 @@ const standButton = document.querySelector('#stand--button')
 const newHandButton =document.querySelector('#hand--button')
 const cashOutButton =document.querySelector('#cash--out--button')
 const cashOutContainer =document.querySelector('#cash--out--conatiner')
+const button4 = document.querySelector('#button4')
 const playerHand =[]
 const dealerHand =[]
 let playerScore = 0
@@ -149,6 +150,11 @@ function stand () {
   renderCardsInContainer(dealerHand, dealerHandContainer); 
   showDealerHandValue()
  }
+
+ const winLoseDisplay = document.createElement('p')
+ button4.insertAdjacentElement("afterend",winLoseDisplay)
+ winLoseDisplay.textContent = "Working"
+
 }
 standButton.addEventListener('click', stand)
 
