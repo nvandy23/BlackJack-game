@@ -35,3 +35,7 @@ button:hover {
 .game--board {
   display: none;
 }
+
+.cash--out--screen {
+  display: none;
+}

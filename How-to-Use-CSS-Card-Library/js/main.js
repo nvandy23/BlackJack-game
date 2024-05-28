@@ -14,6 +14,8 @@ const playerChips = document.querySelector('#Your--chips')
 const hitButton = document.querySelector('#hit--button')
 const standButton = document.querySelector('#stand--button')
 const newHandButton =document.querySelector('#hand--button')
+const cashOutButton =document.querySelector('#cash--out--button')
+const cashOutContainer =document.querySelector('#cash--out--conatiner')
 const playerHand =[]
 const dealerHand =[]
 let playerScore = 0
@@ -168,3 +170,10 @@ function resetGame() {
   showDealerHandValue();
 }
 newHandButton.addEventListener('click', resetGame);
+
+function cashedOut () { 
+  gameBoardContainer.style.display ="none"
+  cashOutContainer.style.display ="block"
+}
+
+cashOutButton.addEventListener('click',cashedOut)
