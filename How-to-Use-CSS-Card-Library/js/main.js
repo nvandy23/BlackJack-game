@@ -12,6 +12,8 @@ const dealerHandValue = document.querySelector('#dealer--hand--value')
 const playerHandValue = document.querySelector('#player--hand--value')
 const playerChips = document.querySelector('#Your--chips')
 const hitButton = document.querySelector('#hit--button')
+const standButton = document.querySelector('#stand--button')
+const newHandButton =document.querySelector('#hand--button')
 const playerHand =[]
 const dealerHand =[]
 let playerScore = 0
@@ -94,14 +96,6 @@ gameBoardContainer.style.display = 'block';
  getDealerHand()
  showPlayerHandValue()
  showDealerHandValue()
-
-
-
-
-
-
-
-
 console.log(playerCard1)
 console.log(playerCard2)
 console.log(dealerCard1)
@@ -133,7 +127,7 @@ hiddenCard.classList.add('card', 'back')
 return dealerHand
 }
 
-// function to get new card for player
+// function to get new card for player when player clicks hit button
 function getAnotherPlayerCard() {
     const newCard = shuffledDeck.pop();
     playerHand.push(newCard);
@@ -142,6 +136,35 @@ function getAnotherPlayerCard() {
     showPlayerHandValue()
   
 }
-
-
 hitButton.addEventListener('click',getAnotherPlayerCard)
+
+// stand function. If dealer value is 16 or under, dealer has to stand. Otherwise they have to draw another card.
+function stand () {
+ if(sum2 === 16 || sum2 < 16) {
+  const newDealerCard = shuffledDeck.pop()
+  dealerHand.push(newDealerCard)
+  console.log(dealerHand)
+  renderCardsInContainer(dealerHand, dealerHandContainer); 
+  showDealerHandValue()
+ }
+}
+standButton.addEventListener('click', stand)
+
+// reset the game once the new hand button is clicked.
+function resetGame() {
+  playerHand.length = 0;
+  dealerHand.length = 0;
+  playerScore = 0;
+  sum = 0;
+  sum2 = 0;
+  renderNewShuffledDeck();
+  playerHandContainer.innerHTML = '';
+  dealerHandContainer.innerHTML = '';
+  playerHandValue.textContent = '';
+  dealerHandValue.textContent = '';
+  getPlayerHand();
+  getDealerHand();
+  showPlayerHandValue();
+  showDealerHandValue();
+}
+newHandButton.addEventListener('click', resetGame);
