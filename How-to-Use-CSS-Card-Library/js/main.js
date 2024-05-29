@@ -25,8 +25,8 @@ let playerCard2
 let dealerCard1
 let dealerCard2
 let shuffledDeck
-let sum = 0 
-let sum2 = 0
+let sum  
+let sum2 = 0 
 
 
 
@@ -76,6 +76,7 @@ renderNewShuffledDeck();
 
 // function to show value of player hand
 function showPlayerHandValue () {
+  sum = 0 
   for (const score of playerHand) {
     sum += score.value
     playerHandValue.textContent = sum
@@ -84,6 +85,7 @@ function showPlayerHandValue () {
 
 // function to show value of dealer hand
 function showDealerHandValue (){
+  sum2 = 0
   for(const score2 of dealerHand) {
     sum2 += score2.value
     dealerHandValue.textContent = sum2
@@ -98,7 +100,6 @@ gameBoardContainer.style.display = 'block';
  getPlayerHand()
  getDealerHand()
  showPlayerHandValue()
- showDealerHandValue()
 console.log(playerCard1)
 console.log(playerCard2)
 console.log(dealerCard1)
@@ -143,20 +144,34 @@ hitButton.addEventListener('click',getAnotherPlayerCard)
 
 // stand function. If dealer value is 16 or under, dealer has to stand. Otherwise they have to draw another card.
 function stand () {
- if(sum2 === 16 || sum2 < 16) {
-  const newDealerCard = shuffledDeck.pop()
-  dealerHand.push(newDealerCard)
-  console.log(dealerHand)
-  renderCardsInContainer(dealerHand, dealerHandContainer); 
-  showDealerHandValue()
- }
-
- const winLoseDisplay = document.createElement('p')
- button4.insertAdjacentElement("afterend",winLoseDisplay)
- winLoseDisplay.textContent = "Working"
-
+  if(sum2 <=16) {
+    const newDealerCard = shuffledDeck.pop()
+    dealerHand.push(newDealerCard)
+    console.log(dealerHand)
+    renderCardsInContainer(dealerHand, dealerHandContainer); 
+    showDealerHandValue()
+    displayWinLose()
+    console.log("working")
+  }
+  
 }
-standButton.addEventListener('click', stand)
+
+// make the text content of player and dealer values integers so we can compare them for win/loss conditions
+function displayWinLose() {
+  const winLoseDisplay = document.createElement('p');
+  button4.insertAdjacentElement("afterend", winLoseDisplay);
+  const playerValue = parseInt(playerHandValue.textContent, 10);
+  const dealerValue = parseInt(dealerHandValue.textContent, 10);
+  if (playerValue > dealerValue) {
+    winLoseDisplay.textContent = "You win";
+  } else if (playerValue < dealerValue) {
+    winLoseDisplay.textContent = "You lose";
+  } else {
+    winLoseDisplay.textContent = "It's a tie";
+  }
+}
+
+standButton.addEventListener('click', stand);
 
 // reset the game once the new hand button is clicked.
 function resetGame() {
