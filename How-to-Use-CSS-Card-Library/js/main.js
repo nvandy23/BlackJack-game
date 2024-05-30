@@ -169,7 +169,6 @@ function resetGame() {
   getPlayerHand();
   getDealerHand();
   showPlayerHandValue();
-  showDealerHandValue();
 }
 newHandButton.addEventListener('click', resetGame);
 
