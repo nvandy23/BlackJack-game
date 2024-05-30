@@ -126,9 +126,6 @@ function getAnotherPlayerCard() {
   playerHand.push(newCard);
   renderCardsInContainer(playerHand, playerHandContainer);
   showPlayerHandValue();
-  if (playerSum > 21) {
-    displayWinLose();
-  }
 }
 hitButton.addEventListener('click', getAnotherPlayerCard);
 
