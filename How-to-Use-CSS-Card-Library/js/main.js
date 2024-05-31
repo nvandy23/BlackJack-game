@@ -20,6 +20,8 @@ const amountDeposited = document.querySelector('#amount--deposited')
 const amountDepositedText = document.querySelector('#amount--deposited--text')
 const allDepositButtons =document.querySelectorAll('#all--deposit--buttons--container button')
 const maximumDepositAmountText = document.querySelector('.max--deposit--text')
+const customAmountInput = document.getElementById("custom-amount");
+const amountDepositedSpan = document.getElementById("amount--deposited");
 const button4 = document.querySelector('#button4');
 const playerHand = [];
 const dealerHand = [];
@@ -60,6 +62,23 @@ allDepositButtons.forEach(button => {
     console.log(amountDeposited.textContent); 
   });
 });
+
+
+customAmountInput.addEventListener("input", function() {
+  let enteredAmount = parseInt(this.value, 10);
+  if (enteredAmount < 100)  {
+    amountDepositedSpan.textContent = "Enter the minimum amount"
+  } else if (enteredAmount> 10000) {
+    amountDepositedSpan.textContent = "This amounts exceeds 10000";
+  }
+  else if (isNaN(enteredAmount)){
+    amountDepositedSpan.textContent = ""
+  }
+  else {
+    amountDepositedSpan.textContent = enteredAmount
+  }
+});
+
 
 
 
