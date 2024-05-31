@@ -30,6 +30,29 @@ let shuffledDeck;
 let playerSum = 0;
 let dealerSum = 0;
 
+
+
+console.log(allDepositButtons[0].textContent)
+allDepositButtons.forEach(button => {
+  button.addEventListener("click", function() {
+    let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
+    console.log(typeof(parseAmountDeposited));
+    console.log(parseAmountDeposited);
+
+    let parseDepositAmount = parseInt(button.textContent.trim(), 10);
+    console.log(typeof(parseDepositAmount));
+    console.log(parseDepositAmount);
+
+    parseAmountDeposited += parseDepositAmount; 
+    console.log(parseAmountDeposited);
+
+    amountDeposited.textContent = parseAmountDeposited; 
+
+    console.log(amountDeposited.textContent); 
+  });
+});
+
+
 // Build original deck 
 function buildOriginalDeck() {
   const deck = [];
