@@ -69,21 +69,14 @@ function renderNewShuffledDeck() {
 
 // Function to show value of player hand
 function showPlayerHandValue() {
-  playerSum = 0;
-  for (const card of playerHand) {
-    playerSum += card.value;
-  }
+  playerSum = calculateHandValue(playerHand);
   playerHandValue.textContent = playerSum;
   checkPlayerDealerBust();
 }
 
 // Function to show value of dealer hand
 function saveDealerHandValue() {
-  dealerSum = 0;
-  for (const card of dealerHand) {
-    dealerSum += card.value;
-  }
-  return dealerSum
+  dealerSum = calculateHandValue(dealerHand);
 }
 
 // Start game 
@@ -99,10 +92,29 @@ function startGame() {
   saveDealerHandValue();
 
 }
-
 startButton.addEventListener('click', startGame);
 
+// Helper function to calculate hand value considering aces
+function calculateHandValue(hand) {
+  let sum = 0;
+  let aceCount = 0;
 
+  hand.forEach(card => {
+    if (card.face.endsWith('A')) {
+      aceCount += 1;
+      sum += 11;
+    } else {
+      sum += card.value;
+    }
+  });
+
+  while (sum > 21 && aceCount > 0) {
+    sum -= 10;
+    aceCount -= 1;
+  }
+
+  return sum;
+}
 
 // Get and return player hand. Render hand in container.
 function getPlayerHand() {
