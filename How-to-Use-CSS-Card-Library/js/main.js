@@ -17,7 +17,9 @@ const newHandButton = document.querySelector('#hand--button');
 const cashOutButton = document.querySelector('#cash--out--button');
 const cashOutContainer = document.querySelector('#cash--out--conatiner');
 const amountDeposited = document.querySelector('#amount--deposited')
+const amountDepositedText = document.querySelector('#amount--deposited--text')
 const allDepositButtons =document.querySelectorAll('#all--deposit--buttons--container button')
+const maximumDepositAmountText = document.querySelector('.max--deposit--text')
 const button4 = document.querySelector('#button4');
 const playerHand = [];
 const dealerHand = [];
@@ -32,25 +34,34 @@ let dealerSum = 0;
 
 
 
-console.log(allDepositButtons[0].textContent)
+
 allDepositButtons.forEach(button => {
   button.addEventListener("click", function() {
     let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
-    console.log(typeof(parseAmountDeposited));
+    console.log(typeof parseAmountDeposited);
     console.log(parseAmountDeposited);
 
     let parseDepositAmount = parseInt(button.textContent.trim(), 10);
-    console.log(typeof(parseDepositAmount));
+    console.log(typeof parseDepositAmount);
     console.log(parseDepositAmount);
 
     parseAmountDeposited += parseDepositAmount; 
     console.log(parseAmountDeposited);
-
+    
     amountDeposited.textContent = parseAmountDeposited; 
+    
+    // Check if the deposited amount reaches 10000 and the condition hasn't been met before
+    if (parseAmountDeposited >= 10000) {
+      amountDeposited.textContent = 10000;
+      maximumDepositAmountText.style.display = "block"
+      maximumDepositAmountText.textContent = "You entered the maximum amount you can deposit! Hit the start button and good luck!";
+    }
 
     console.log(amountDeposited.textContent); 
   });
 });
+
+
 
 
 // Build original deck 

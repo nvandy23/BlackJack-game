@@ -39,3 +39,6 @@ button:hover {
 .cash--out--screen {
   display: none;
 }
+.max--deposit--text {
+  display: none; 
+}
