@@ -91,14 +91,18 @@ function startGame() {
   startScreenContainer.style.display = 'none';
   gameBoardContainer.style.display = 'block';
   resetHands();
+  getNewShuffledDeck();
   renderNewShuffledDeck();
   getPlayerHand();
   getDealerHand();
   showPlayerHandValue();
   saveDealerHandValue();
+
 }
 
 startButton.addEventListener('click', startGame);
+
+
 
 // Get and return player hand. Render hand in container.
 function getPlayerHand() {
@@ -127,8 +131,19 @@ function getAnotherPlayerCard() {
   playerHand.push(newCard);
   renderCardsInContainer(playerHand, playerHandContainer);
   showPlayerHandValue();
+  saveDealerHandValue()
 }
 hitButton.addEventListener('click', getAnotherPlayerCard);
+
+// Dealer draws cards until the total is above 16
+function checkdealerSum () {
+  while (dealerSum <= 16) {
+    const newDealerCard = shuffledDeck.pop();
+    dealerHand.push(newDealerCard);
+    renderCardsInContainer(dealerHand, dealerHandContainer);
+    saveDealerHandValue();
+  }
+}
 
 function stand() {
   // Show the dealer's hidden card
@@ -136,16 +151,10 @@ function stand() {
   if (hiddenCard) {
     hiddenCard.classList.remove('back');
   }
-
-  // Dealer draws cards until the total is above 16
-  while (dealerSum <= 16) {
-    const newDealerCard = shuffledDeck.pop();
-    dealerHand.push(newDealerCard);
-    renderCardsInContainer(dealerHand, dealerHandContainer);
-    saveDealerHandValue();
-  }
-
+  
+  
   displayWinLose();
+  checkdealerSum();
 }
 
 standButton.addEventListener('click', stand);
@@ -154,6 +163,7 @@ standButton.addEventListener('click', stand);
 function displayWinLose() {
   const winLoseDisplay = document.createElement('p');
   button4.insertAdjacentElement("afterend", winLoseDisplay);
+  checkdealerSum();
   if (playerSum > 21) {
     winLoseDisplay.textContent = "You busted! Dealer wins.";
   } else if(playerSum < dealerSum && dealerSum ===21) {
@@ -166,7 +176,9 @@ function displayWinLose() {
     winLoseDisplay.textContent = "You win! ";
   } else if (playerSum < dealerSum) {
     winLoseDisplay.textContent = "You lose.";
-  } else {
+  } else if (playerSum > 21 && dealerSum >21) {
+    winLoseDisplay.textContent = "It's a push! You get your original bet back."
+  }else {
     winLoseDisplay.textContent = "It's a tie.";
   }
   dealerHandValue.textContent = dealerSum;
