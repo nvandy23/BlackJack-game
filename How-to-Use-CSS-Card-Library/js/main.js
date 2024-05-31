@@ -156,10 +156,14 @@ function displayWinLose() {
   button4.insertAdjacentElement("afterend", winLoseDisplay);
   if (playerSum > 21) {
     winLoseDisplay.textContent = "You busted! Dealer wins.";
+  } else if(playerSum < dealerSum && dealerSum ===21) {
+    winLoseDisplay.textContent = "Dealer has a blackjack. You lost";
+  } else if (playerSum > dealerSum && playerSum ===21) {
+    winLoseDisplay.textContent = "You have a blackjack! You win!";
   } else if (dealerSum > 21) {
-    winLoseDisplay.textContent = "Dealer busted! You win.";
+    winLoseDisplay.textContent = "Dealer busted! You win!";
   } else if (playerSum > dealerSum) {
-    winLoseDisplay.textContent = "You win.";
+    winLoseDisplay.textContent = "You win! ";
   } else if (playerSum < dealerSum) {
     winLoseDisplay.textContent = "You lose.";
   } else {
