@@ -159,30 +159,32 @@ function stand() {
 
 standButton.addEventListener('click', stand);
 
+const winLoseDisplay = document.createElement('p');
+button4.insertAdjacentElement("afterend", winLoseDisplay);
+
 // Display win/lose message
 function displayWinLose() {
-  const winLoseDisplay = document.createElement('p');
-  button4.insertAdjacentElement("afterend", winLoseDisplay);
   checkdealerSum();
-  if (playerSum > 21) {
+  if (playerSum > 21 && dealerSum > 21) {
+    winLoseDisplay.textContent = "It's a push! You get your original bet back.";
+  } else if (playerSum > 21) {
     winLoseDisplay.textContent = "You busted! Dealer wins.";
-  } else if(playerSum < dealerSum && dealerSum ===21) {
+  } else if (playerSum < dealerSum && dealerSum === 21) {
     winLoseDisplay.textContent = "Dealer has a blackjack. You lost";
-  } else if (playerSum > dealerSum && playerSum ===21) {
+  } else if (playerSum > dealerSum && playerSum === 21) {
     winLoseDisplay.textContent = "You have a blackjack! You win!";
   } else if (dealerSum > 21) {
     winLoseDisplay.textContent = "Dealer busted! You win!";
   } else if (playerSum > dealerSum) {
-    winLoseDisplay.textContent = "You win! ";
+    winLoseDisplay.textContent = "You win!";
   } else if (playerSum < dealerSum) {
     winLoseDisplay.textContent = "You lose.";
-  } else if (playerSum > 21 && dealerSum >21) {
-    winLoseDisplay.textContent = "It's a push! You get your original bet back."
-  }else {
+  } else {
     winLoseDisplay.textContent = "It's a tie.";
   }
   dealerHandValue.textContent = dealerSum;
 }
+
 
 // Reset the game once the new hand button is clicked.
 function resetGame() {
@@ -191,6 +193,7 @@ function resetGame() {
   getPlayerHand();
   getDealerHand();
   showPlayerHandValue();
+  winLoseDisplay.textContent ='';
 }
 newHandButton.addEventListener('click', resetGame);
 
