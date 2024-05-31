@@ -78,12 +78,11 @@ function showPlayerHandValue() {
 }
 
 // Function to show value of dealer hand
-function showDealerHandValue() {
+function saveDealerHandValue() {
   dealerSum = 0;
   for (const card of dealerHand) {
     dealerSum += card.value;
   }
-  // dealerHandValue.textContent = dealerSum;
   return dealerSum
 }
 
@@ -96,7 +95,7 @@ function startGame() {
   getPlayerHand();
   getDealerHand();
   showPlayerHandValue();
-  showDealerHandValue();
+  saveDealerHandValue();
 }
 
 startButton.addEventListener('click', startGame);
@@ -143,7 +142,7 @@ function stand() {
     const newDealerCard = shuffledDeck.pop();
     dealerHand.push(newDealerCard);
     renderCardsInContainer(dealerHand, dealerHandContainer);
-    showDealerHandValue();
+    saveDealerHandValue();
   }
 
   displayWinLose();
@@ -199,7 +198,7 @@ cashOutButton.addEventListener('click', cashedOut);
 // Check if player or dealer has busted
 function checkPlayerDealerBust() {
   if (playerSum > 21) {
-    showDealerHandValue();
+    saveDealerHandValue();
     renderCardsInContainer(dealerHand, dealerHandContainer);
     displayWinLose();
   }
