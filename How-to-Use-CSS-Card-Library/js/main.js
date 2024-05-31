@@ -83,10 +83,11 @@ function showDealerHandValue() {
   for (const card of dealerHand) {
     dealerSum += card.value;
   }
-  dealerHandValue.textContent = dealerSum;
+  // dealerHandValue.textContent = dealerSum;
+  return dealerSum
 }
 
-// Start game
+// Start game 
 function startGame() {
   startScreenContainer.style.display = 'none';
   gameBoardContainer.style.display = 'block';
@@ -95,6 +96,7 @@ function startGame() {
   getPlayerHand();
   getDealerHand();
   showPlayerHandValue();
+  showDealerHandValue();
 }
 
 startButton.addEventListener('click', startGame);
@@ -129,16 +131,24 @@ function getAnotherPlayerCard() {
 }
 hitButton.addEventListener('click', getAnotherPlayerCard);
 
-// Stand function. Dealer draws until value is above 16.
 function stand() {
+  // Show the dealer's hidden card
+  const hiddenCard = dealerHandContainer.querySelector('.back');
+  if (hiddenCard) {
+    hiddenCard.classList.remove('back');
+  }
+
+  // Dealer draws cards until the total is above 16
   while (dealerSum <= 16) {
     const newDealerCard = shuffledDeck.pop();
     dealerHand.push(newDealerCard);
     renderCardsInContainer(dealerHand, dealerHandContainer);
     showDealerHandValue();
   }
-  displayWinLose()
+
+  displayWinLose();
 }
+
 standButton.addEventListener('click', stand);
 
 // Display win/lose message
@@ -156,7 +166,7 @@ function displayWinLose() {
   } else {
     winLoseDisplay.textContent = "It's a tie.";
   }
-  showDealerHandValue()
+  dealerHandValue.textContent = dealerSum;
 }
 
 // Reset the game once the new hand button is clicked.
