@@ -22,6 +22,7 @@ const allDepositButtons =document.querySelectorAll('#all--deposit--buttons--cont
 const maximumDepositAmountText = document.querySelector('.max--deposit--text')
 const customAmountInput = document.getElementById("custom-amount");
 const amountDepositedSpan = document.getElementById("amount--deposited");
+const resetDepositButton =document.querySelector('#reset--deposit--button')
 const button4 = document.querySelector('#button4');
 const playerHand = [];
 const dealerHand = [];
@@ -38,19 +39,31 @@ let dealerSum = 0;
 
 
 allDepositButtons.forEach(button => {
-  button.addEventListener("click", function() {
+  function handleDepositClick() {
     let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
     console.log(typeof parseAmountDeposited);
     console.log(parseAmountDeposited);
     let parseDepositAmount = parseInt(button.textContent.trim(), 10);
     console.log(typeof parseDepositAmount);
     console.log(parseDepositAmount);
-    parseAmountDeposited += parseDepositAmount; 
+    parseAmountDeposited += parseDepositAmount;
     console.log(parseAmountDeposited);
-    amountDeposited.textContent = parseAmountDeposited; 
-    console.log(amountDeposited.textContent); 
-  });
-});
+    resetDepositButton.addEventListener('click',function(){
+      amountDeposited.textContent = 0
+      customAmountInput.value =""
+    })
+    if (parseAmountDeposited > 10000) {
+      amountDeposited.textContent = 10000;
+    } else {
+      amountDeposited.textContent = parseAmountDeposited;
+    }
+      };
+    console.log(amountDeposited.textContent);
+    button.addEventListener('click',handleDepositClick)
+  })
+
+
+
 
 // Handle custom deposit amount input validation
 customAmountInput.addEventListener("input", function() {
