@@ -42,41 +42,33 @@ allDepositButtons.forEach(button => {
     let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
     console.log(typeof parseAmountDeposited);
     console.log(parseAmountDeposited);
-
     let parseDepositAmount = parseInt(button.textContent.trim(), 10);
     console.log(typeof parseDepositAmount);
     console.log(parseDepositAmount);
-
     parseAmountDeposited += parseDepositAmount; 
     console.log(parseAmountDeposited);
-    
     amountDeposited.textContent = parseAmountDeposited; 
-    
-    // Check if the deposited amount reaches 10000 and the condition hasn't been met before
-    if (parseAmountDeposited >= 10000) {
-      amountDeposited.textContent = 10000;
-      maximumDepositAmountText.style.display = "block"
-      maximumDepositAmountText.textContent = "You entered the maximum amount you can deposit! Hit the start button and good luck!";
-    }
-
     console.log(amountDeposited.textContent); 
   });
 });
 
-
+// Handle custom deposit amount input validation
 customAmountInput.addEventListener("input", function() {
   let enteredAmount = parseInt(this.value, 10);
-  if (enteredAmount < 100)  {
-    amountDepositedSpan.textContent = "Enter the minimum amount"
-  } else if (enteredAmount> 10000) {
-    amountDepositedSpan.textContent = "This amounts exceeds 10000";
+  if (isNaN(enteredAmount) || enteredAmount < 100) {
+    this.setCustomValidity("Please enter an amount of at least 100.");
+  } else if (enteredAmount > 10000) {
+    this.setCustomValidity("This amount exceeds 10000.");
+  } else {
+    this.setCustomValidity(""); 
   }
-  else if (isNaN(enteredAmount)){
-    amountDepositedSpan.textContent = ""
+
+  if (!isNaN(enteredAmount) && enteredAmount >= 100 && enteredAmount <= 10000) {
+    amountDepositedSpan.textContent = enteredAmount;
+  } else {
+    amountDepositedSpan.textContent = 0;
   }
-  else {
-    amountDepositedSpan.textContent = enteredAmount
-  }
+  this.reportValidity();
 });
 
 
@@ -227,6 +219,7 @@ function stand() {
 standButton.addEventListener('click', stand);
 
 const winLoseDisplay = document.createElement('p');
+
 button4.insertAdjacentElement("afterend", winLoseDisplay);
 
 // Display win/lose message
