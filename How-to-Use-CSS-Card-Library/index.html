@@ -11,19 +11,22 @@
 </head>
 
 <body>
-<section class = "start--screen" id="start--screen--container">
-<h1> Welcome to BlackJack!</h1>
-<div class =" player--deposit" id="player--deposit--container ">
-<h2> Enter a deposit amount to get started:</h2>
-<button>50</button>
-<button>100</button>
-<button>250</button>
-<button>500</button>
-<button>1000</button>
-Enter a  custom amount: <input placeholder ="Min 20 Max 10000" required>
-<button id ="start--button"> Deposit and Start</button>
-</section>
-</div>
+  <section class="start--screen" id="start--screen--container">
+    <h1>Welcome to BlackJack!</h1>
+    <div class="player--deposit" id="player--deposit--container">
+      <h2>Enter a deposit amount to get started:</h2>
+      <div class="all--deposit--buttons" id="all--deposit--buttons--container">
+        <button>50</button>
+        <button>100</button>
+        <button>250</button>
+        <button>500</button>
+        <button>1000</button>
+      </div>
+      Enter a custom amount: <input id="custom-amount" placeholder="Min 20 Max 10000" required>
+      <p>Amount deposited: <span class="amount" id="amount--deposited">0</span></p>
+      <button id="start--button">Deposit and Start</button>
+    </div>
+  </section>
 
 <section class ="game--board" id="game--board--container">
   <h2>Dealer hand value: <span id = "dealer--hand--value"> </span></h2>

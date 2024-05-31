@@ -16,6 +16,8 @@ const standButton = document.querySelector('#stand--button');
 const newHandButton = document.querySelector('#hand--button');
 const cashOutButton = document.querySelector('#cash--out--button');
 const cashOutContainer = document.querySelector('#cash--out--conatiner');
+const amountDeposited = document.querySelector('#amount--deposited')
+const allDepositButtons =document.querySelectorAll('#all--deposit--buttons--container button')
 const button4 = document.querySelector('#button4');
 const playerHand = [];
 const dealerHand = [];
@@ -194,6 +196,8 @@ function displayWinLose() {
   } else {
     winLoseDisplay.textContent = "It's a tie.";
   }
+  hitButton.removeEventListener('click', getAnotherPlayerCard);
+  standButton.removeEventListener('click', stand);
   dealerHandValue.textContent = dealerSum;
 }
 
@@ -218,6 +222,8 @@ function resetHands() {
   dealerHandContainer.innerHTML = '';
   playerHandValue.textContent = '';
   dealerHandValue.textContent = '';
+  hitButton.addEventListener('click', getAnotherPlayerCard);
+  standButton.addEventListener('click', stand);
 }
 
 function cashedOut() {
