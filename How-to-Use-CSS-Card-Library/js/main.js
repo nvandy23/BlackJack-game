@@ -178,6 +178,11 @@ function setWagerContents () {
         button.textContent =parseInt(`${wagerRange.value * .50}`);
         break;
     }
+    button.addEventListener('click', function() {
+      let remainingChips = parseInt(amountDeposited.textContent) - parseInt(button.textContent);
+      yourChips.textContent = remainingChips; 
+    });
+
   });
 
   }
