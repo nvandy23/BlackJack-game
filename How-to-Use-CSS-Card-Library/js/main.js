@@ -26,6 +26,7 @@ const resetDepositButton =document.querySelector('#reset--deposit--button')
 const allWagerButtons =document.querySelectorAll('#all--wagers--container button')
 const yourChips = document.querySelector('#your--chips')
 const button4 = document.querySelector('#button4');
+const wagerRange =document.querySelector("#wager--range")
 const playerHand = [];
 const dealerHand = [];
 let playerScore = 0;
@@ -154,6 +155,7 @@ function startGame() {
   getDealerHand();
   showPlayerHandValue();
   saveDealerHandValue();
+  setWagerContents();
 
 }
 startButton.addEventListener('click', startGame);
@@ -162,25 +164,28 @@ function setWagerContents () {
   allWagerButtons.forEach((button,idx) => {
     switch (idx) {
       case 0:
-        button.textContent = "Button 1 Clicked";
+        button.textContent = `${amountDeposited.textContent * .05}`;
         break;
       case 1:
-        button.textContent = "Button 2 Clicked";
+        button.textContent = `${amountDeposited.textContent * .10}`;
         break;
       
       case 2:
-        button.textContent =" Button 3 Clicked"
+        button.textContent =`${amountDeposited.textContent * .20}`
         break;
        
       case 3:
-        button.textContent ="Button 4 Clicked"
+        button.textContent =`${wagerRange.value}`;
         break;
     }
   });
 
   }
 
-setWagerContents()
+  wagerRange.addEventListener('input', function() {
+    setWagerContents();
+  });
+
 
 // Helper function to calculate hand value considering aces
 function calculateHandValue(hand) {
