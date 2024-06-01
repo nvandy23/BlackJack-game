@@ -23,6 +23,8 @@ const maximumDepositAmountText = document.querySelector('.max--deposit--text')
 const customAmountInput = document.getElementById("custom-amount");
 const amountDepositedSpan = document.getElementById("amount--deposited");
 const resetDepositButton =document.querySelector('#reset--deposit--button')
+const allWagerButtons =document.querySelectorAll('#all--wagers--container button')
+const yourChips = document.querySelector('#your--chips')
 const button4 = document.querySelector('#button4');
 const playerHand = [];
 const dealerHand = [];
@@ -57,6 +59,7 @@ allDepositButtons.forEach(button => {
     } else {
       amountDeposited.textContent = parseAmountDeposited;
     }
+    yourChips.textContent = `${amountDeposited.textContent}`;
       };
     console.log(amountDeposited.textContent);
     button.addEventListener('click',handleDepositClick)
@@ -122,6 +125,7 @@ function getNewShuffledDeck() {
   }
   return newShuffledDeck;
 }
+console.log(getNewShuffledDeck())
 
 function renderNewShuffledDeck() {
   shuffledDeck = getNewShuffledDeck();
@@ -153,6 +157,30 @@ function startGame() {
 
 }
 startButton.addEventListener('click', startGame);
+
+function setWagerContents () {
+  allWagerButtons.forEach((button,idx) => {
+    switch (idx) {
+      case 0:
+        button.textContent = "Button 1 Clicked";
+        break;
+      case 1:
+        button.textContent = "Button 2 Clicked";
+        break;
+      
+      case 2:
+        button.textContent =" Button 3 Clicked"
+        break;
+       
+      case 3:
+        button.textContent ="Button 4 Clicked"
+        break;
+    }
+  });
+
+  }
+
+setWagerContents()
 
 // Helper function to calculate hand value considering aces
 function calculateHandValue(hand) {
