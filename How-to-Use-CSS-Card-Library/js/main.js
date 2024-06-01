@@ -175,7 +175,7 @@ function setWagerContents () {
         break;
        
       case 3:
-        button.textContent =`${wagerRange.value}`;
+        button.textContent =parseInt(`${wagerRange.value * .50}`);
         break;
     }
   });
