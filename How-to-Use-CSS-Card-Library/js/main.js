@@ -175,7 +175,9 @@ function setWagerContents () {
         break;
        
       case 3:
-        button.textContent =parseInt(`${wagerRange.value * .50}`);
+        const maxWager = Math.min(parseInt(amountDeposited.textContent * 0.50), parseInt(amountDeposited.textContent));
+        wagerRange.setAttribute('max', maxWager);
+        button.textContent = parseInt(`${wagerRange.value}`);
         break;
     }
     button.addEventListener('click', function() {
