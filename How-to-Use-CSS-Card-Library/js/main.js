@@ -61,6 +61,7 @@ allDepositButtons.forEach(button => {
       amountDeposited.textContent = parseAmountDeposited;
     }
     yourChips.textContent = `${amountDeposited.textContent}`;
+    setWagerContents()
       };
     console.log(amountDeposited.textContent);
     button.addEventListener('click',handleDepositClick)
@@ -155,12 +156,11 @@ function startGame() {
   getDealerHand();
   showPlayerHandValue();
   saveDealerHandValue();
-  setWagerContents();
-
 }
+
 startButton.addEventListener('click', startGame);
 
-function setWagerContents () {
+function setWagerContents() {
   allWagerButtons.forEach((button,idx) => {
     switch (idx) {
       case 0:
@@ -181,17 +181,17 @@ function setWagerContents () {
         break;
     }
     button.addEventListener('click', function() {
-      let remainingChips = parseInt(amountDeposited.textContent) - parseInt(button.textContent);
+      let remainingChips = parseInt(yourChips.textContent) - parseInt(button.textContent);
       yourChips.textContent = remainingChips; 
     });
 
   });
-
   }
 
   wagerRange.addEventListener('input', function() {
     setWagerContents();
   });
+
 
 
 // Helper function to calculate hand value considering aces
@@ -324,6 +324,7 @@ function resetHands() {
   hitButton.addEventListener('click', getAnotherPlayerCard);
   standButton.addEventListener('click', stand);
 }
+
 
 function cashedOut() {
   gameBoardContainer.style.display = "none";
