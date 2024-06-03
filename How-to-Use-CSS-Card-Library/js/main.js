@@ -41,31 +41,28 @@ let dealerSum = 0;
 
 
 
+function handleDepositClick() {
+  let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
+  let parseDepositAmount = parseInt(this.textContent.trim(), 10);
+  parseAmountDeposited += parseDepositAmount;
+  if (parseAmountDeposited > 10000) {
+    amountDeposited.textContent = 10000;
+  } else {
+    amountDeposited.textContent = parseAmountDeposited;
+  }
+  yourChips.textContent = `${amountDeposited.textContent}`;
+}
+
 allDepositButtons.forEach(button => {
-  function handleDepositClick() {
-    let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
-    console.log(typeof parseAmountDeposited);
-    console.log(parseAmountDeposited);
-    let parseDepositAmount = parseInt(button.textContent.trim(), 10);
-    console.log(typeof parseDepositAmount);
-    console.log(parseDepositAmount);
-    parseAmountDeposited += parseDepositAmount;
-    console.log(parseAmountDeposited);
-    resetDepositButton.addEventListener('click',function(){
-      amountDeposited.textContent = 0
-      customAmountInput.value =""
-    })
-    if (parseAmountDeposited > 10000) {
-      amountDeposited.textContent = 10000;
-    } else {
-      amountDeposited.textContent = parseAmountDeposited;
-    }
-    yourChips.textContent = `${amountDeposited.textContent}`;
-    setWagerContents()
-      };
-    console.log(amountDeposited.textContent);
-    button.addEventListener('click',handleDepositClick)
-  })
+  button.addEventListener('click', handleDepositClick);
+});
+
+resetDepositButton.addEventListener('click', function() {
+  amountDeposited.textContent = 0;
+  customAmountInput.value = "";
+});
+
+
 
 
 
@@ -82,12 +79,14 @@ customAmountInput.addEventListener("input", function() {
   }
 
   if (!isNaN(enteredAmount) && enteredAmount >= 100 && enteredAmount <= 10000) {
-    amountDepositedSpan.textContent = enteredAmount;
+    amountDeposited.textContent = enteredAmount;
+    yourChips.textContent = enteredAmount
+    setWagerContents()
   } else {
-    amountDepositedSpan.textContent = 0;
+    amountDeposited.textContent = 0;
   }
   this.reportValidity();
-});
+})
 
 
 
@@ -156,41 +155,54 @@ function startGame() {
   getDealerHand();
   showPlayerHandValue();
   saveDealerHandValue();
+  setWagerContents()
 }
+
+
 
 startButton.addEventListener('click', startGame);
 
 function setWagerContents() {
-  allWagerButtons.forEach((button,idx) => {
+  // Remove existing event listeners to avoid adding duplicates
+  allWagerButtons.forEach(button => {
+    button.removeEventListener('click', handleWagerButtonClick);
+  });
+
+  allWagerButtons.forEach((button, idx) => {
     switch (idx) {
       case 0:
-        button.textContent = `${amountDeposited.textContent * .05}`;
+        button.textContent = `${amountDeposited.textContent * 0.05}`;
         break;
       case 1:
-        button.textContent = `${amountDeposited.textContent * .10}`;
+        button.textContent = `${amountDeposited.textContent * 0.10}`;
         break;
-      
       case 2:
-        button.textContent =`${amountDeposited.textContent * .20}`
+        button.textContent = `${amountDeposited.textContent * 0.20}`;
         break;
-       
       case 3:
         const maxWager = Math.min(parseInt(amountDeposited.textContent * 0.50), parseInt(amountDeposited.textContent));
         wagerRange.setAttribute('max', maxWager);
         button.textContent = parseInt(`${wagerRange.value}`);
         break;
     }
-    button.addEventListener('click', function() {
-      let remainingChips = parseInt(yourChips.textContent) - parseInt(button.textContent);
-      yourChips.textContent = remainingChips; 
-    });
-
+    button.addEventListener('click', handleWagerButtonClick);
   });
-  }
+}
 
-  wagerRange.addEventListener('input', function() {
-    setWagerContents();
-  });
+
+function handleWagerButtonClick() {
+  let remainingChips = parseInt(yourChips.textContent) - parseInt(this.textContent);
+  yourChips.textContent = remainingChips;
+}
+
+function handleWagerRangeChange() {
+  setWagerContents(); 
+}
+
+wagerRange.addEventListener('input', handleWagerRangeChange);
+
+
+
 
 
 
