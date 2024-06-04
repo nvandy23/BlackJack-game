@@ -57,11 +57,15 @@ allDepositButtons.forEach(button => {
   button.addEventListener('click', handleDepositClick);
 });
 
-resetDepositButton.addEventListener('click', function() {
+resetDepositButton.addEventListener('click', function(evt) {
   amountDeposited.textContent = 0;
   customAmountInput.value = "";
+  console.log(evt)
 });
-
+function removeHitStandButton() {
+  hitButton.removeEventListener('click', getAnotherPlayerCard);
+  standButton.removeEventListener('click', stand);
+}
 
 
 
@@ -156,6 +160,7 @@ function startGame() {
   showPlayerHandValue();
   saveDealerHandValue();
   setWagerContents()
+  removeHitStandButton()
 }
 
 
@@ -163,7 +168,6 @@ function startGame() {
 startButton.addEventListener('click', startGame);
 
 function setWagerContents() {
-  // Remove existing event listeners to avoid adding duplicates
   allWagerButtons.forEach(button => {
     button.removeEventListener('click', handleWagerButtonClick);
   });
@@ -187,12 +191,14 @@ function setWagerContents() {
     }
     button.addEventListener('click', handleWagerButtonClick);
   });
-}
+}  
 
 
 function handleWagerButtonClick() {
   let remainingChips = parseInt(yourChips.textContent) - parseInt(this.textContent);
   yourChips.textContent = remainingChips;
+  hitButton.addEventListener('click', getAnotherPlayerCard);
+  standButton.addEventListener('click', stand);
 }
 
 function handleWagerRangeChange() {
@@ -257,7 +263,7 @@ function getAnotherPlayerCard() {
   showPlayerHandValue();
   saveDealerHandValue()
 }
-hitButton.addEventListener('click', getAnotherPlayerCard);
+// hitButton.addEventListener('click', getAnotherPlayerCard);
 
 // Dealer draws cards until the total is above 16
 function checkdealerSum () {
@@ -270,6 +276,7 @@ function checkdealerSum () {
 }
 
 function stand() {
+
   // Show the dealer's hidden card
   const hiddenCard = dealerHandContainer.querySelector('.back');
   if (hiddenCard) {
@@ -281,7 +288,7 @@ function stand() {
   checkdealerSum();
 }
 
-standButton.addEventListener('click', stand);
+// standButton.addEventListener('click', stand);
 
 const winLoseDisplay = document.createElement('p');
 
@@ -314,13 +321,15 @@ function displayWinLose() {
 
 
 // Reset the game once the new hand button is clicked.
-function resetGame() {
+function resetGame(evt) {
   resetHands();
   renderNewShuffledDeck();
   getPlayerHand();
   getDealerHand();
   showPlayerHandValue();
   winLoseDisplay.textContent ='';
+  removeHitStandButton(evt)
+
 }
 newHandButton.addEventListener('click', resetGame);
 
