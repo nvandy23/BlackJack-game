@@ -65,10 +65,7 @@ resetDepositButton.addEventListener('click', function(evt) {
   customAmountInput.value = "";
   console.log(evt)
 });
-function removeHitStandButton() {
-  hitButton.removeEventListener('click', getAnotherPlayerCard);
-  standButton.removeEventListener('click', stand);
-}
+
 
 
 
@@ -163,8 +160,10 @@ function startGame() {
   showPlayerHandValue();
   saveDealerHandValue();
   setWagerContents()
-  removeHitStandButton()
+  // removeHitStandButton()
   yourBetAmount.textContent = 0
+  hitButton.disabled = true
+  standButton.disabled = true 
 }
 
 
@@ -210,6 +209,9 @@ function handleWagerButtonClick(event) {
   console.log("Wager amount after parsing:", wagerAmount);
   allWagerButtons.forEach(wagerButton => {
     wagerButton.disabled = true;
+    hitButton.disabled = false 
+    standButton.disabled = false
+    cashOutButton.disabled = true;
   });
 
   console.log("Before parsing:", yourChips.textContent);
@@ -223,6 +225,7 @@ function handleWagerButtonClick(event) {
 
   hitButton.addEventListener('click', getAnotherPlayerCard);
   standButton.addEventListener('click', stand);
+  newHandButton.disabled = true;
 }
 
 function handleResetWagerButtonClick() {
@@ -230,9 +233,13 @@ function handleResetWagerButtonClick() {
   let returnedChips = parseInt(yourChips.textContent) + parseInt(yourBetAmount.textContent);
   yourChips.textContent = parseInt(returnedChips);
   yourBetAmount.textContent = 0;
+ newHandButton.disabled = false 
+ hitButton.disabled = true
+ standButton.disabled = true 
+ cashOutButton.disabled = false;
+
   resetWagerButton.addEventListener('click', handleResetWagerButtonClick);
 }
-
 
 
 
@@ -355,14 +362,19 @@ function displayWinLose() {
   dealerHandValue.textContent = dealerSum;
   allWagerButtons.forEach(button => {
     button.disabled =true
+    cashOutButton.disabled = false;
+    hitButton.disabled = true;
+    standButton.disabled = true;
   })
-  resetWagerButton.disabled = true
+  resetWagerButton.disabled = true;
+  newHandButton.disabled = false;
+
 }
 
 function addWagerButtonListeners() {
   allWagerButtons.forEach(button => {
     button.addEventListener('click', handleWagerButtonClick);
-    button.disabled = false; // Enable the button
+    button.disabled = false; 
   });
 }
 
@@ -375,8 +387,6 @@ function resetGame() {
   showPlayerHandValue();
   winLoseDisplay.textContent ='';
   removeHitStandButton()
-  addWagerButtonListeners()
-  resetWagerButton.disabled = false
 
 }
 newHandButton.addEventListener('click', resetGame);
@@ -393,6 +403,8 @@ function resetHands() {
   hitButton.addEventListener('click', getAnotherPlayerCard);
   standButton.addEventListener('click', stand);
   yourBetAmount.textContent = 0;
+  addWagerButtonListeners()
+  resetWagerButton.disabled = false;
 }
 
 
