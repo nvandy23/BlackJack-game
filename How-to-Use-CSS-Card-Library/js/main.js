@@ -188,13 +188,21 @@ function setWagerContents() {
 
         button.addEventListener('click', handleWagerButtonClick);
         button.disabled = false;
-        
+
     });
 }
 
+
 function handleWagerRangeChange() {
-  setWagerContents(); 
+  setWagerContents();
+  allWagerButtons.forEach((button, idx) => {
+      if (idx !== 3) {
+          button.disabled = true; 
+      }
+  });
+  wagerRange.disabled = false; 
 }
+
 
 wagerRange.addEventListener('input', handleWagerRangeChange);
 
@@ -227,6 +235,7 @@ function handleResetWagerButtonClick() {
     newHandButton.disabled = false;
     hitButton.disabled = true;
     standButton.disabled = true;
+    cashOutButton.disabled =false;
 }
 
 function calculateHandValue(hand) {
@@ -316,6 +325,7 @@ function displayWinLose() {
         winLoseDisplay.textContent = "You lose.";
     } else {
         winLoseDisplay.textContent = "It's a tie.";
+        betAmount + parseInt(yourChips.textContent, 10);
     }
     hitButton.removeEventListener('click', getAnotherPlayerCard);
     standButton.removeEventListener('click', stand);
@@ -379,9 +389,3 @@ function checkPlayerDealerBust() {
 }
 
 
-
-// function handleWagerRangeChange() {
-//   setWagerContents(); 
-// }
-
-// wagerRange.addEventListener('input', handleWagerRangeChange);
