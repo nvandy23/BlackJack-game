@@ -28,6 +28,7 @@ const yourBetAmount =document.querySelector('#your--bet--amount')
 const yourChips = document.querySelector('#your--chips')
 const button4 = document.querySelector('#button4');
 const wagerRange =document.querySelector("#wager--range")
+const resetWagerButton =document.querySelector('#reset--wager--button')
 const playerHand = [];
 const dealerHand = [];
 let playerScore = 0;
@@ -193,6 +194,7 @@ function setWagerContents() {
     }
   
     button.addEventListener('click', handleWagerButtonClick);
+    button.disabled = false;
   });
 }  
 
@@ -202,6 +204,11 @@ function handleWagerButtonClick() {
       wagerButton.disabled = true;
     }
   });
+
+  resetWagerButton.addEventListener('click',function(){
+    addWagerButtonListeners()
+    yourBetAmount.textContent = '';
+  })
 
 
   let remainingChips = parseInt(yourChips.textContent) - parseInt(this.textContent);
@@ -332,6 +339,12 @@ function displayWinLose() {
   dealerHandValue.textContent = dealerSum;
 }
 
+function addWagerButtonListeners() {
+  allWagerButtons.forEach(button => {
+    button.addEventListener('click', handleWagerButtonClick);
+    button.disabled = false; // Enable the button
+  });
+}
 
 // Reset the game once the new hand button is clicked.
 function resetGame() {
@@ -342,6 +355,7 @@ function resetGame() {
   showPlayerHandValue();
   winLoseDisplay.textContent ='';
   removeHitStandButton()
+  addWagerButtonListeners()
 
 }
 newHandButton.addEventListener('click', resetGame);
@@ -357,6 +371,7 @@ function resetHands() {
   dealerHandValue.textContent = '';
   hitButton.addEventListener('click', getAnotherPlayerCard);
   standButton.addEventListener('click', stand);
+  yourBetAmount.textContent = '';
 }
 
 
