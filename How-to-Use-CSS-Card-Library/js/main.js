@@ -46,15 +46,24 @@ function handleDepositClick() {
     console.log("Deposit Amount:", parseDepositAmount);
     console.log("Current Deposited:", parseAmountDeposited);
     parseAmountDeposited += parseDepositAmount;
+
     if (parseAmountDeposited > 10000) {
         amountDeposited.textContent = 10000;
     } else {
         amountDeposited.textContent = parseAmountDeposited;
     }
-    yourChips.textContent = parseInt(amountDeposited.textContent, 10);
-    console.log("New Deposited:", amountDeposited.textContent);
-    console.log("Chips:", yourChips.textContent);
+    
+    // Update yourChips to the integer value
+    yourChips.textContent = parseAmountDeposited;
+    console.log("New Deposited:", parseInt(amountDeposited.textContent, 10));
+    console.log("Chips:", parseInt(yourChips.textContent, 10));
+
+    // Reset yourBetAmount to 0 if needed
+    yourBetAmount.textContent = 0;
+    console.log("Your current bet:", parseInt(yourBetAmount.textContent, 10));
 }
+
+
 
 allDepositButtons.forEach(button => {
     button.addEventListener('click', handleDepositClick);
@@ -152,9 +161,15 @@ function startGame() {
     showPlayerHandValue();
     saveDealerHandValue();
     setWagerContents();
-    yourBetAmount.textContent = 0;
     hitButton.disabled = true;
     standButton.disabled = true;
+    console.log("Amount Deposited Element:", amountDeposited);
+console.log("Your Chips Element:", yourChips);
+console.log("Your Bet Amount Element:", yourBetAmount);
+if(yourChips === 0 && yourBetAmount === 0) {
+    gameOver()
+}
+
 }
 
 startButton.addEventListener('click', startGame);
@@ -186,9 +201,9 @@ function setWagerContents() {
                 break;
         }
 
-        button.addEventListener('click', handleWagerButtonClick);
         button.disabled = false;
-
+        
+        button.addEventListener('click', handleWagerButtonClick);
     });
 }
 
@@ -197,7 +212,7 @@ function handleWagerRangeChange() {
   setWagerContents();
   allWagerButtons.forEach((button, idx) => {
       if (idx !== 3) {
-          button.disabled = true; 
+          button.disabled = true;
       }
   });
   wagerRange.disabled = false; 
@@ -214,6 +229,9 @@ function handleWagerButtonClick(event) {
         hitButton.disabled = false;
         standButton.disabled = false;
         cashOutButton.disabled = true;
+        if(wagerButton.disabled === true){
+            wagerRange.style.display = "none";
+        }
     });
 
     let remainingChips = parseInt(yourChips.textContent, 10) - wagerAmount;
@@ -221,6 +239,9 @@ function handleWagerButtonClick(event) {
     yourBetAmount.textContent = wagerAmount;
     console.log("Remaining Chips:", remainingChips);
     console.log("Your Bet Amount:", wagerAmount);
+    if(remainingChips === 0 && wagerAmount === 0) {
+        gameOver()
+    }
 
     hitButton.addEventListener('click', getAnotherPlayerCard);
     standButton.addEventListener('click', stand);
@@ -231,7 +252,8 @@ function handleResetWagerButtonClick() {
     addWagerButtonListeners();
     let returnedChips = parseInt(yourChips.textContent, 10) + parseInt(yourBetAmount.textContent, 10);
     yourChips.textContent = returnedChips;
-    yourBetAmount.textContent = 0;
+    yourBetAmount.textContent = parseInt(0)
+    console.log("returned chips:",returnedChips)
     newHandButton.disabled = false;
     hitButton.disabled = true;
     standButton.disabled = true;
@@ -388,4 +410,6 @@ function checkPlayerDealerBust() {
     }
 }
 
-
+ function gameOver() {
+    gameBoardContainer.style.display = "none"
+ }
