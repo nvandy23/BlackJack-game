@@ -163,6 +163,7 @@ function startGame() {
     setWagerContents();
     hitButton.disabled = true;
     standButton.disabled = true;
+    newHandButton.disabled = true;
     console.log("Amount Deposited Element:", amountDeposited);
 console.log("Your Chips Element:", yourChips);
 console.log("Your Bet Amount Element:", yourBetAmount);
@@ -258,6 +259,7 @@ function handleResetWagerButtonClick() {
     hitButton.disabled = true;
     standButton.disabled = true;
     cashOutButton.disabled =false;
+    wagerRange.style.display = "block";
 }
 
 function calculateHandValue(hand) {
@@ -351,6 +353,7 @@ function displayWinLose() {
     }
     hitButton.removeEventListener('click', getAnotherPlayerCard);
     standButton.removeEventListener('click', stand);
+    newHandButton.disabled = false;
     dealerHandValue.textContent = dealerSum;
     allWagerButtons.forEach(button => {
         button.disabled = true;
@@ -393,6 +396,8 @@ function resetHands() {
     yourBetAmount.textContent = 0;
     addWagerButtonListeners();
     resetWagerButton.disabled = false;
+    wagerRange.style.display = "block";
+    newHandButton.disabled = true;
 }
 
 function cashedOut() {
