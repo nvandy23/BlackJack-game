@@ -58,12 +58,10 @@ function handleDepositClick() {
     console.log("New Deposited:", parseInt(amountDeposited.textContent, 10));
     console.log("Chips:", parseInt(yourChips.textContent, 10));
 
-    // Reset yourBetAmount to 0 if needed
+    // Reset yourBetAmount to 0
     yourBetAmount.textContent = 0;
     console.log("Your current bet:", parseInt(yourBetAmount.textContent, 10));
 }
-
-
 
 allDepositButtons.forEach(button => {
     button.addEventListener('click', handleDepositClick);
@@ -75,7 +73,6 @@ resetDepositButton.addEventListener('click', function(evt) {
     console.log("Reset Deposit Button Clicked", evt);
 });
 
-// Handle custom deposit amount input validation
 customAmountInput.addEventListener("input", function() {
     let enteredAmount = parseInt(this.value, 10);
     if (isNaN(enteredAmount) || enteredAmount < 100) {
@@ -96,6 +93,7 @@ customAmountInput.addEventListener("input", function() {
     this.reportValidity();
     console.log("Custom Amount Entered:", enteredAmount);
 });
+
 
 // Build original deck 
 function buildOriginalDeck() {
@@ -167,9 +165,6 @@ function startGame() {
     console.log("Amount Deposited Element:", amountDeposited);
 console.log("Your Chips Element:", yourChips);
 console.log("Your Bet Amount Element:", yourBetAmount);
-if(yourChips === 0 && yourBetAmount === 0) {
-    gameOver()
-}
 
 }
 
@@ -364,6 +359,15 @@ function displayWinLose() {
     resetWagerButton.disabled = true;
     newHandButton.disabled = false;
     yourBetAmount.textContent = 0;
+    const parsedYourChips = parseInt(yourChips.textContent, 10)
+    console.log(parsedYourChips)
+    const parsedYourBetAmount = parseInt(yourBetAmount.textContent,10)
+    console.log(parsedYourBetAmount)
+    if(parsedYourChips=== 0 && parsedYourBetAmount=== 0) {
+    gameOver()
+}
+    
+
 }
 
 function addWagerButtonListeners() {
