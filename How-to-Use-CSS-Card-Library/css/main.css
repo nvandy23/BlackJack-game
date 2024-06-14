@@ -42,3 +42,7 @@ button:hover {
 .max--deposit--text {
   display: none; 
 }
+
+.game--over{
+  display: none;
+}

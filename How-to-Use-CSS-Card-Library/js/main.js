@@ -29,6 +29,7 @@ const yourChips = document.querySelector('#your--chips');
 const button4 = document.querySelector('#button4');
 const wagerRange = document.querySelector("#wager--range");
 const resetWagerButton = document.querySelector('#reset--wager--button');
+const gameOverContainer = document.querySelector('#game--over--container');
 const playerHand = [];
 const dealerHand = [];
 let playerScore = 0;
@@ -421,4 +422,6 @@ function checkPlayerDealerBust() {
 
  function gameOver() {
     gameBoardContainer.style.display = "none"
+
+
  }
