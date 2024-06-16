@@ -425,3 +425,4 @@ function checkPlayerDealerBust() {
 
 
  }
+// continue game over function
