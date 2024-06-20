@@ -201,6 +201,10 @@ function setWagerContents() {
         button.disabled = false;
         
         button.addEventListener('click', handleWagerButtonClick);
+       if(yourChipsValue <= parseInt(amountDeposited.textContent *.02)) {
+        button.textContent = yourChipsValue
+       }
+       console.log(amountDeposited)
     });
 }
 
