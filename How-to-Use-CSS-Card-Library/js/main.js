@@ -30,6 +30,8 @@ const button4 = document.querySelector('#button4');
 const wagerRange = document.querySelector("#wager--range");
 const resetWagerButton = document.querySelector('#reset--wager--button');
 const gameOverContainer = document.querySelector('#game--over--container');
+const cashOutMessage = document.querySelector('#cashout-message');
+const continuePlayingButton =document.querySelector('#continue--playing')
 const playerHand = [];
 const dealerHand = [];
 let playerScore = 0;
@@ -413,9 +415,20 @@ function resetHands() {
 function cashedOut() {
     gameBoardContainer.style.display = "none";
     cashOutContainer.style.display = "block";
+    cashOutMessage.textContent = `You cashed out with ${yourChips.textContent} chips remaining`;
 }
 
+function continuePlaying() {
+    cashOutContainer.style.display ="none";
+    gameBoardContainer.style.display ="block";
+}
+continuePlayingButton.addEventListener('click',continuePlaying)
+
+
+
 cashOutButton.addEventListener('click', cashedOut);
+
+
 
 function checkPlayerDealerBust() {
     if (playerSum > 21) {
