@@ -180,19 +180,19 @@ function setWagerContents() {
     });
 
     allWagerButtons.forEach((button, idx) => {
-        let amountDepositedValue = parseInt(amountDeposited.textContent, 10);
+        let yourChipsValue = parseInt(yourChips.textContent, 10);
         switch (idx) {
             case 0:
-                button.textContent = `${Math.floor(amountDepositedValue * 0.05)}`;
+                button.textContent = `${Math.floor(yourChipsValue * 0.05)}`;
                 break;
             case 1:
-                button.textContent = `${Math.floor(amountDepositedValue * 0.10)}`;
+                button.textContent = `${Math.floor(yourChipsValue * 0.10)}`;
                 break;
             case 2:
-                button.textContent = `${Math.floor(amountDepositedValue * 0.20)}`;
+                button.textContent = `${Math.floor(yourChipsValue * 0.20)}`;
                 break;
             case 3:
-                const maxWager = Math.min(parseInt(amountDepositedValue * 0.50, 10), amountDepositedValue);
+                const maxWager = Math.min(parseInt(yourChipsValue * 0.50, 10), yourChipsValue);
                 wagerRange.setAttribute('max', maxWager);
                 button.textContent = parseInt(wagerRange.value, 10);
                 break;
@@ -343,7 +343,7 @@ function displayWinLose() {
         yourChips.textContent = betAmount * 2 + parseInt(yourChips.textContent, 10);
     } else if (playerSum < dealerSum) {
         winLoseDisplay.textContent = "You lose.";
-    } else {
+    } else {            
         winLoseDisplay.textContent = "It's a tie.";
         betAmount + parseInt(yourChips.textContent, 10);
     }
@@ -385,6 +385,7 @@ function resetGame() {
     getDealerHand();
     showPlayerHandValue();
     winLoseDisplay.textContent = '';
+    setWagerContents()
 }
 
 function resetHands() {
@@ -422,6 +423,8 @@ function checkPlayerDealerBust() {
 
  function gameOver() {
     gameBoardContainer.style.display = "none"
+    gameOverContainer.style.display = "block"
+
 
 
  }
