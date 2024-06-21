@@ -34,6 +34,7 @@ const cashOutMessage = document.querySelector('#cashout-message');
 const continuePlayingButton =document.querySelector('#continue--playing')
 const addChipsButton =document.querySelector("#add--chips")
 const playerDeposit =document.querySelector('#player--deposit--container')
+const startOverButton =document.querySelector('#start--over--button')
 const playerHand = [];
 const dealerHand = [];
 let playerScore = 0;
@@ -389,7 +390,7 @@ function displayWinLose() {
     const parsedYourBetAmount = parseInt(yourBetAmount.textContent,10)
     console.log(parsedYourBetAmount)
     if(parsedYourChips=== 0 && parsedYourBetAmount=== 0) {
-    gameOver()
+    gameOverScreen()
 }
     
 
@@ -471,8 +472,17 @@ function checkPlayerDealerBust() {
     }
 }
 
- function gameOver() {
+ function gameOverScreen() {
     gameBoardContainer.style.display = "none"
     gameOverContainer.style.display = "block"
 
  }
+
+ function gameOver() {
+    gameOverContainer.style.display ="none";
+    startScreenContainer.style.display = "block";
+    amountDeposited.textContent = 0
+
+ }
+
+ startOverButton.addEventListener('click',gameOver)
