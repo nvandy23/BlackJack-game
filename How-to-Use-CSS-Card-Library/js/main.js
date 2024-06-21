@@ -32,6 +32,8 @@ const resetWagerButton = document.querySelector('#reset--wager--button');
 const gameOverContainer = document.querySelector('#game--over--container');
 const cashOutMessage = document.querySelector('#cashout-message');
 const continuePlayingButton =document.querySelector('#continue--playing')
+const addChipsButton =document.querySelector("#add--chips")
+const playerDeposit =document.querySelector('#player--deposit--container')
 const playerHand = [];
 const dealerHand = [];
 let playerScore = 0;
@@ -42,6 +44,7 @@ let dealerCard2;
 let shuffledDeck;
 let playerSum = 0;
 let dealerSum = 0;
+let cashedOutChips = document.createElement('p')
 
 function handleDepositClick() {
     let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
@@ -52,12 +55,24 @@ function handleDepositClick() {
 
     if (parseAmountDeposited > 10000) {
         amountDeposited.textContent = 10000;
+        yourChips.textContent = 10000;
+        cashedOutChips.textContent = 10000;
     } else {
         amountDeposited.textContent = parseAmountDeposited;
+        yourChips.textContent = parseAmountDeposited;
     }
     
-    // Update yourChips to the integer value
-    yourChips.textContent = parseAmountDeposited;
+
+    if (cashedOutChips) {
+        if(parseAmountDeposited > 10000){
+            cashedOutChips.textContent = "Your chips remaining: 10000";
+        }
+        else{
+            cashedOutChips.textContent = `Your chips remaining: ${parseAmountDeposited}`;
+        }
+        }
+    
+    
     console.log("New Deposited:", parseInt(amountDeposited.textContent, 10));
     console.log("Chips:", parseInt(yourChips.textContent, 10));
 
@@ -152,6 +167,9 @@ function saveDealerHandValue() {
 
 // Start game 
 function startGame() {
+    if (cashedOutChips) {
+        resetGame()
+    }
     startScreenContainer.style.display = 'none';
     gameBoardContainer.style.display = 'block';
     resetHands();
@@ -417,6 +435,7 @@ function cashedOut() {
     cashOutContainer.style.display = "block";
     cashOutMessage.textContent = `You cashed out with ${yourChips.textContent} chips remaining`;
 }
+cashOutButton.addEventListener('click', cashedOut);
 
 function continuePlaying() {
     cashOutContainer.style.display ="none";
@@ -424,9 +443,23 @@ function continuePlaying() {
 }
 continuePlayingButton.addEventListener('click',continuePlaying)
 
+function addChips(){
+cashOutContainer.style.display ="none";
+startScreenContainer.style.display ="block";
+cashedOutChips.textContent = `Chips remaining: ${yourChips.textContent}`
+amountDepositedText.insertAdjacentElement('afterend',cashedOutChips)
+if(amountDepositedText){
+    playerDeposit.removeChild(amountDepositedText)
+    startButton.textContent = "Deposit and Continue"
+}
 
 
-cashOutButton.addEventListener('click', cashedOut);
+}
+addChipsButton.addEventListener('click',addChips)
+
+
+
+
 
 
 
@@ -442,7 +475,4 @@ function checkPlayerDealerBust() {
     gameBoardContainer.style.display = "none"
     gameOverContainer.style.display = "block"
 
-
-
  }
-// continue game over function
