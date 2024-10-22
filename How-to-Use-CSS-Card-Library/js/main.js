@@ -76,8 +76,6 @@ function handleDepositClick() {
     
     console.log("New Deposited:", parseInt(amountDeposited.textContent, 10));
     console.log("Chips:", parseInt(yourChips.textContent, 10));
-
-    // Reset yourBetAmount to 0
     yourBetAmount.textContent = 0;
     console.log("Your current bet:", parseInt(yourBetAmount.textContent, 10));
 }
@@ -138,7 +136,7 @@ function renderCardsInContainer(deck, container) {
     container.innerHTML = cardsHtml;
 }
 
-// Get new shuffled Deck
+
 function getNewShuffledDeck() {
     const tempDeck = [...originalDeck];
     const newShuffledDeck = [];
@@ -154,19 +152,19 @@ function renderNewShuffledDeck() {
     shuffledDeck = getNewShuffledDeck();
 }
 
-// Function to show value of player hand
+
 function showPlayerHandValue() {
     playerSum = calculateHandValue(playerHand);
     playerHandValue.textContent = playerSum;
     checkPlayerDealerBust();
 }
 
-// Function to show value of dealer hand
+
 function saveDealerHandValue() {
     dealerSum = calculateHandValue(dealerHand);
 }
 
-// Start game 
+
 function startGame() {
     if (cashedOutChips) {
         resetGame()
@@ -488,4 +486,4 @@ function checkPlayerDealerBust() {
  startOverButton.addEventListener('click',gameOver)
 
  // start css
- /
+ 

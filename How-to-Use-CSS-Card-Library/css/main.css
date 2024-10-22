@@ -5,6 +5,10 @@
 body {
   height: 100vh;
   font-family: sans-serif;
+  background-image: url(blackjack-pic.jpg);
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
 }
 
 .card-container {
@@ -16,11 +20,11 @@ body {
 }
 
 button {
-  display: block;
+  display: inline-block;
   margin: 10px auto;
   padding: 10px;
   font-size: 16px;
-  color: grey;
+  color: red;
   border: 1px solid grey;
   border-radius: 4px;
   outline: none;
