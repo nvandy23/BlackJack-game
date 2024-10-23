@@ -46,6 +46,7 @@ let shuffledDeck;
 let playerSum = 0;
 let dealerSum = 0;
 let cashedOutChips = document.createElement('p')
+startButton.disabled=true;
 
 function handleDepositClick() {
     let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
@@ -61,6 +62,7 @@ function handleDepositClick() {
     } else {
         amountDeposited.textContent = parseAmountDeposited;
         yourChips.textContent = parseAmountDeposited;
+        startButton.disabled=false;
     }
     
 
@@ -88,22 +90,29 @@ resetDepositButton.addEventListener('click', function(evt) {
     amountDeposited.textContent = 0;
     customAmountInput.value = "";
     console.log("Reset Deposit Button Clicked", evt);
+    startButton.disabled =true;
+
 });
 
 customAmountInput.addEventListener("input", function() {
     let enteredAmount = parseInt(this.value, 10);
     if (isNaN(enteredAmount) || enteredAmount < 100) {
         this.setCustomValidity("Please enter an amount of at least 100.");
+        startButton.disabled=true
     } else if (enteredAmount > 10000) {
         this.setCustomValidity("This amount exceeds 10000.");
+        startButton.disabled=true
     } else {
         this.setCustomValidity("");
+        startButton.disabled=false;
     }
 
     if (!isNaN(enteredAmount) && enteredAmount >= 100 && enteredAmount <= 10000) {
         amountDeposited.textContent = enteredAmount;
         yourChips.textContent = enteredAmount;
+        
         setWagerContents();
+        startButton.disabled=false;
     } else {
         amountDeposited.textContent = 0;
     }
