@@ -28,8 +28,8 @@ body {
 button {
   display: inline-block;
   margin: 20px;
-  padding: 20px;
-  font-size: 24px;
+  padding: 15px;
+  font-size: 20px;
   color: red;
   border: 1px solid grey;
   border-radius: 4px;
@@ -57,12 +57,19 @@ button:hover {
 
 .wager-buttons {
   display: flex;
-  justify-content: space-between; /* Spread the buttons horizontally */
-  gap: 10px; /* Add some spacing between buttons */
+  justify-content: space-between;
+  gap: 10px; 
 }
 
 .button-container button {
-  margin-top: 10px; /* Space between the slider and button 4 */
+  margin-top: 10px; 
+}
+
+.bet--and--chips--container {
+    display: flex;
+  justify-content: center; 
+  gap: 20px; 
+  margin-top: 20px; 
 }
 
 

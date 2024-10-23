@@ -23,7 +23,8 @@
         <button>5000</button>
       </div>
       Enter a custom amount: <input id="custom-amount" value =""  placeholder="Min: 100 Max: 10000" required>
-      <p id = "amount--deposited--text">Amount deposited: <span class="amount" id="amount--deposited">0</span><span><button id ="reset--deposit--button">Reset deposit</button></span></p>
+      <p id = "amount--deposited--text">Amount deposited: <span class="amount" id="amount--deposited">0</span></p>
+       <p> <span><button id ="reset--deposit--button">Reset amount</button></span></p>
       <p class = "max--deposit--text" id ="max--deposit--text--container"> </p>
       <button id="start--button">Deposit and Start</button>
     </div>
@@ -40,16 +41,19 @@
   <div class = "player--hand" id="player--hand--container"></div>
 <div class ="game--score" id = "game-score--container"></div>
 <div class ="bets" id = "your--bets--container"></div>
-<p> Your bet:<span class ="your--bet" id ="your--bet--amount">0</span></p>
-<p class="your--chips--remaining ">Your chips remaining: <span id = "your--chips"></span></p>
+<div class ="bet--and--chips--container">
+  
+  <p> Your bet:<span class ="your--bet" id ="your--bet--amount">0</span></p>
+  <p class="your--chips--remaining ">Your chips remaining: <span id = "your--chips"></span></p>
+</div>
 <div class = "all--wagers" id = "all--wagers--container">
   <button>1</button>
   <button>2</button>
   <button>3</button>
   <button class ="4" id = "button4">4</button>
   <input type="range" id = "wager--range" min="20" max="5000" value="">
-  <button class ="reset--wager" id = "reset--wager--button">Reset Wager</button>
 </div>
+<button class ="reset--wager" id = "reset--wager--button">Reset Wager</button>
 </section>
 
 <section class = "cash--out--screen" id = "cash--out--container">
