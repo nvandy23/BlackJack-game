@@ -499,5 +499,5 @@ function checkPlayerDealerBust() {
 
  startOverButton.addEventListener('click',gameOver)
 
- // start css
+
  

@@ -13,7 +13,10 @@ body {
   justify-content: center;    
   align-items: center;        
   text-align: center;
+  color: #FFD700; 
+  text-shadow: -2px -2px 0 #000;
 }
+
 
 .start--screen {
 font-size: 30px;
@@ -36,17 +39,30 @@ font-size: 30px;
 button {
   display: inline-block;
   margin: 25px;
-  padding: 10px 15px;
+  padding: 10px 20px;
   font-size: 20px;
-  color: red;
-  border: 1px solid grey;
-  border-radius: 4px;
+  color: #FFD700; 
+  background-color: #333; 
+  border: 2px solid #FFD700; 
+  border-radius: 8px;
   outline: none;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.6); 
+  transition: transform 0.3s, box-shadow 0.3s; 
 }
+
 
 button:hover {
   background-color: grey;
   color: white;
+}
+
+button:disabled {
+  background-color: #555; 
+  color: #999; 
+  border-color: #777; 
+  cursor: not-allowed; 
+  box-shadow: none; 
+  transform: none; 
 }
 
 .your--bet {
@@ -74,10 +90,11 @@ button:hover {
 }
 
 .bet--and--chips--container {
-    display: flex;
+  display: flex;
   justify-content: center; 
   gap: 20px; 
   margin-top: 20px; 
+  font-size: 25px;
 }
 
 
