@@ -4,6 +4,8 @@ const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', '
 const originalDeck = buildOriginalDeck();
 const startButton = document.querySelector('#start--button');
 const startScreenContainer = document.querySelector("#start--screen--container");
+const startScreenHeader =document.querySelector('#start--screen--header')
+const startScreenText =document.querySelector('#start--screen--text')
 const gameBoardContainer = document.querySelector('#game--board--container');
 const shuffledContainer = document.getElementById('shuffled-deck-container');
 const playerHandContainer = document.querySelector('#player--hand--container');
@@ -456,6 +458,9 @@ cashOutContainer.style.display ="none";
 startScreenContainer.style.display ="block";
 cashedOutChips.textContent = `Chips remaining: ${yourChips.textContent}`
 amountDepositedText.insertAdjacentElement('afterend',cashedOutChips)
+resetDepositButton.remove()
+startScreenHeader.textContent ="How many chips would you like to add?"
+startScreenText.textContent =""
 if(amountDepositedText){
     playerDeposit.removeChild(amountDepositedText)
     startButton.textContent = "Deposit and Continue"

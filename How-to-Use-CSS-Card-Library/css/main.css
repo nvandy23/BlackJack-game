@@ -4,7 +4,7 @@
 
 body {
   height: 100vh;
-  font-family: sans-serif;
+  font-family: Brush Script MT;
   background-image: url(blackjack-pic.jpg);
   background-size: cover; 
   background-position: center; 
@@ -12,7 +12,15 @@ body {
   display: flex;              
   justify-content: center;    
   align-items: center;        
-  text-align: center; 
+  text-align: center;
+}
+
+.start--screen {
+font-size: 30px;
+}
+
+.all--deposit-buttons {
+  padding: 20px 20px;
 }
 
 .card-container {
@@ -27,8 +35,8 @@ body {
 
 button {
   display: inline-block;
-  margin: 20px;
-  padding: 15px;
+  margin: 25px;
+  padding: 10px 15px;
   font-size: 20px;
   color: red;
   border: 1px solid grey;
