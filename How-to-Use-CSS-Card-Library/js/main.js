@@ -354,6 +354,7 @@ function stand() {
 }
 
 const winLoseDisplay = document.createElement('p');
+winLoseDisplay.classList.add('win--lose--display')
 button4.insertAdjacentElement("afterend", winLoseDisplay);
 
 function displayWinLose() {
@@ -451,7 +452,8 @@ function continuePlaying() {
     cashOutContainer.style.display ="none";
     gameBoardContainer.style.display ="block";
 }
-continuePlayingButton.addEventListener('click',continuePlaying)
+continuePlayingButton.removeEventListener('click', continuePlaying);  
+continuePlayingButton.addEventListener('click', continuePlaying);
 
 function addChips(){
 cashOutContainer.style.display ="none";
@@ -500,4 +502,4 @@ function checkPlayerDealerBust() {
  startOverButton.addEventListener('click',gameOver)
 
 
- 
+ // continue css
