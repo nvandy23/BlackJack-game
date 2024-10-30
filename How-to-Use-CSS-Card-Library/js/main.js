@@ -49,40 +49,58 @@ let playerSum = 0;
 let dealerSum = 0;
 let cashedOutChips = document.createElement('p')
 startButton.disabled=true;
+cashedOutChips.textContent = 0
+
+
+
 
 function handleDepositClick() {
-    let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
-    let parseDepositAmount = parseInt(this.textContent.trim(), 10);
-    console.log("Deposit Amount:", parseDepositAmount);
-    console.log("Current Deposited:", parseAmountDeposited);
-    parseAmountDeposited += parseDepositAmount;
+    console.log("Deposit Button Clicked");
+    
+    if (startScreenText.textContent !== "") {
+        console.log("Reset Deposit Button exists.");
+        
+        let parseAmountDeposited = parseInt(amountDeposited.textContent, 10);
+        let parseDepositAmount = parseInt(this.textContent.trim(), 10);
+        
+        console.log("Deposit Amount:", parseDepositAmount);
+        console.log("Current Deposited:", parseAmountDeposited);
+        
+        parseAmountDeposited += parseDepositAmount;
 
-    if (parseAmountDeposited > 10000) {
-        amountDeposited.textContent = 10000;
-        yourChips.textContent = 10000;
-        cashedOutChips.textContent = 10000;
+        if (parseAmountDeposited >= 10000) {
+            amountDeposited.textContent = 10000;
+            yourChips.textContent = 10000;
+            cashedOutChips.textContent = 10000;
+        } else {
+            amountDeposited.textContent = parseAmountDeposited;
+            yourChips.textContent = parseAmountDeposited;
+            startButton.disabled = false;
+        }
+
+        cashedOutChips.textContent = `Your chips remaining: ${Math.min(parseAmountDeposited, 10000)}`;
+        console.log("New Deposited:", parseInt(amountDeposited.textContent, 10));
+        console.log("Chips:", parseInt(yourChips.textContent, 10));
+        yourBetAmount.textContent = 0;
+        console.log("Your current bet:", parseInt(yourBetAmount.textContent, 10));
+
     } else {
-        amountDeposited.textContent = parseAmountDeposited;
-        yourChips.textContent = parseAmountDeposited;
-        startButton.disabled=false;
+        console.log("Reset Deposit Button does not exist.");
+        cashedOutChips.textContent = 0
+        
+        // Calculate and display total chips with remaining chips and deposit
+        let parseDepositAmount = parseInt(this.textContent.trim(), 10);
+        let remainingChips = parseInt(cashedOutChips.textContent, 10);
+        
+        cashedOutChips.textContent = parseDepositAmount += remainingChips;
+        amountDepositedText.textContent = `Chips remaining: ${yourChips.textContent}`;
+        console.log(yourChips.textContent)
+        
+        startButton.disabled = false;  
     }
-    
-
-    if (cashedOutChips) {
-        if(parseAmountDeposited > 10000){
-            cashedOutChips.textContent = "Your chips remaining: 10000";
-        }
-        else{
-            cashedOutChips.textContent = `Your chips remaining: ${parseAmountDeposited}`;
-        }
-        }
-    
-    
-    console.log("New Deposited:", parseInt(amountDeposited.textContent, 10));
-    console.log("Chips:", parseInt(yourChips.textContent, 10));
-    yourBetAmount.textContent = 0;
-    console.log("Your current bet:", parseInt(yourBetAmount.textContent, 10));
 }
+
+
 
 allDepositButtons.forEach(button => {
     button.addEventListener('click', handleDepositClick);
@@ -180,9 +198,14 @@ function startGame() {
     if (cashedOutChips) {
         resetGame()
     }
+    startScreen =false
     startScreenContainer.style.display = 'none';
     gameBoardContainer.style.display = 'block';
     resetHands();
+    if (resetDepositButton) {
+        resetDepositButton.remove();
+        console.log("Reset Deposit Button removed:", !document.body.contains(resetDepositButton)); 
+    }
     getNewShuffledDeck();
     renderNewShuffledDeck();
     getPlayerHand();
@@ -193,7 +216,7 @@ function startGame() {
     hitButton.disabled = true;
     standButton.disabled = true;
     newHandButton.disabled = true;
-    console.log("Amount Deposited Element:", amountDeposited);
+    console.log("Amount Deposited:", parseInt(amountDeposited.textContent));
 console.log("Your Chips Element:", yourChips);
 console.log("Your Bet Amount Element:", yourBetAmount);
 
@@ -444,7 +467,9 @@ function resetHands() {
 function cashedOut() {
     gameBoardContainer.style.display = "none";
     cashOutContainer.style.display = "block";
+
     cashOutMessage.textContent = `You cashed out with ${yourChips.textContent} chips remaining`;
+    resetDepositButton.remove()
 }
 cashOutButton.addEventListener('click', cashedOut);
 
@@ -456,9 +481,11 @@ continuePlayingButton.removeEventListener('click', continuePlaying);
 continuePlayingButton.addEventListener('click', continuePlaying);
 
 function addChips(){
+if(!startScreen){
 cashOutContainer.style.display ="none";
 startScreenContainer.style.display ="block";
-cashedOutChips.textContent = `Chips remaining: ${yourChips.textContent}`
+cashedOutChips.textContent = `Remaining chips: ${parseInt(yourChips.textContent, 10)}`;
+console.log(`Chips remaining: ${cashedOutChips.textContent}`)
 amountDepositedText.insertAdjacentElement('afterend',cashedOutChips)
 resetDepositButton.remove()
 startScreenHeader.textContent ="How many chips would you like to add?"
@@ -469,6 +496,8 @@ if(amountDepositedText){
 }
 
 
+
+}
 }
 addChipsButton.addEventListener('click',addChips)
 
