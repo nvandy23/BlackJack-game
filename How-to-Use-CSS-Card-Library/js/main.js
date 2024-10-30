@@ -82,19 +82,27 @@ function handleDepositClick() {
         console.log("New Deposited:", parseInt(amountDeposited.textContent, 10));
         console.log("Chips:", parseInt(yourChips.textContent, 10));
         yourBetAmount.textContent = 0;
+        setWagerContents()
         console.log("Your current bet:", parseInt(yourBetAmount.textContent, 10));
 
     } else {
         console.log("Reset Deposit Button does not exist.");
         cashedOutChips.textContent = 0
-        
-        // Calculate and display total chips with remaining chips and deposit
         let parseDepositAmount = parseInt(this.textContent.trim(), 10);
-        let remainingChips = parseInt(cashedOutChips.textContent, 10);
+        let remainingChips = parseInt(yourChips.textContent, 10);
         
         cashedOutChips.textContent = parseDepositAmount += remainingChips;
+        yourChips.textContent =parseDepositAmount += remainingChips
+        if(yourChips.textContent > 10000) {
+            yourChips.textContent = 10000
+        }
         amountDepositedText.textContent = `Chips remaining: ${yourChips.textContent}`;
         console.log(yourChips.textContent)
+        yourChips.textContent =cashedOutChips.textContent
+        wagerRange.max = parseInt(yourChips.textContent, 10) * 0.5;
+        setWagerContents();
+        
+        
         
         startButton.disabled = false;  
     }
@@ -198,7 +206,7 @@ function startGame() {
     if (cashedOutChips) {
         resetGame()
     }
-    startScreen =false
+
     startScreenContainer.style.display = 'none';
     gameBoardContainer.style.display = 'block';
     resetHands();
@@ -481,7 +489,7 @@ continuePlayingButton.removeEventListener('click', continuePlaying);
 continuePlayingButton.addEventListener('click', continuePlaying);
 
 function addChips(){
-if(!startScreen){
+
 cashOutContainer.style.display ="none";
 startScreenContainer.style.display ="block";
 cashedOutChips.textContent = `Remaining chips: ${parseInt(yourChips.textContent, 10)}`;
@@ -497,7 +505,6 @@ if(amountDepositedText){
 
 
 
-}
 }
 addChipsButton.addEventListener('click',addChips)
 
