@@ -37,6 +37,7 @@ const continuePlayingButton =document.querySelector('#continue--playing')
 const addChipsButton =document.querySelector("#add--chips")
 const playerDeposit =document.querySelector('#player--deposit--container')
 const startOverButton =document.querySelector('#start--over--button')
+const customAmountText =document.querySelector('#custom--amount--text')
 const playerHand = [];
 const dealerHand = [];
 let playerScore = 0;
@@ -108,6 +109,7 @@ function handleDepositClick() {
         yourChips.textContent = cashedOutChips.textContent
         wagerRange.max = parseInt(yourChips.textContent, 10) * 0.5;
         setWagerContents();
+        disableDepositButtons();
         
         
         
@@ -286,6 +288,7 @@ function setWagerContents() {
                 const maxWager = Math.min(parseInt(yourChipsValue * 0.50, 10), yourChipsValue);
                 wagerRange.setAttribute('max', maxWager);
                 button.textContent = parseInt(wagerRange.value, 10);
+                resetWagerButton.disabled = false;
                 break;
         }
 
@@ -353,6 +356,7 @@ function handleResetWagerButtonClick() {
     standButton.disabled = true;
     cashOutButton.disabled =false;
     wagerRange.style.display = "block";
+    resetWagerButton.disabled = true;
 }
 
 function calculateHandValue(hand) {
@@ -484,6 +488,7 @@ function resetGame() {
     showPlayerHandValue();
     winLoseDisplay.textContent = '';
     setWagerContents()
+    resetWagerButton.disabled = true;
 }
 
 function resetHands() {
@@ -499,7 +504,7 @@ function resetHands() {
     standButton.addEventListener('click', stand);
     yourBetAmount.textContent = 0;
     addWagerButtonListeners();
-    resetWagerButton.disabled = false;
+    resetWagerButton.disabled=true;
     wagerRange.style.display = "block";
     newHandButton.disabled = true;
 }
@@ -510,6 +515,8 @@ function cashedOut() {
 
     cashOutMessage.textContent = `You cashed out with ${yourChips.textContent} chips remaining`;
     resetDepositButton.remove()
+    customAmountInput.remove()
+    customAmountText.remove()
 }
 cashOutButton.addEventListener('click', cashedOut);
 
