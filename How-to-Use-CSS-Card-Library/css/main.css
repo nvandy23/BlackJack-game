@@ -121,4 +121,5 @@ button:disabled {
 
 .game--over{
   display: none;
+  font-size: 100px;
 }

@@ -99,6 +99,9 @@ function handleDepositClick() {
         yourChips.textContent =parseDepositAmount += remainingChips
         if(cashedOutChips.textContent >= 10000) {
             cashedOutChips.textContent = 10000
+            allDepositButtons.forEach(button => {
+                button.disabled =true;
+            })
         }
         amountDepositedText.textContent = `Chips remaining: ${yourChips.textContent}`;
         console.log(yourChips.textContent)
@@ -141,7 +144,12 @@ function handleCustomAmountInput() {
     } else if (enteredAmount > 10000) {
         customAmountInput.setCustomValidity("This amount exceeds 10000.");
         startButton.disabled = true;
-    } else {
+    }
+     else if (cashedOutChips.textContent < 10000 || cashedOutChips.textContent >=100)
+        allDepositButtons.forEach(button => {
+            button.disabled =false;
+        })
+     else {
         customAmountInput.setCustomValidity("");
         startButton.disabled = false;
     }
@@ -152,6 +160,7 @@ function handleCustomAmountInput() {
         if(startScreenText.textContent ===""){
             yourChips.textContent = enteredAmount
             cashedOutChips.textContent = enteredAmount
+
             console.log("working")
         }
         setWagerContents();
@@ -184,7 +193,6 @@ function buildOriginalDeck() {
     return deck;
 }
 
-// Setup render player and dealer hand container function 
 function renderCardsInContainer(deck, container) {
     container.innerHTML = '';
     let cardsHtml = '';
@@ -245,6 +253,7 @@ function startGame() {
     hitButton.disabled = true;
     standButton.disabled = true;
     newHandButton.disabled = true;
+    resetWagerButton.disabled=true;
     console.log("Amount Deposited:", parseInt(amountDeposited.textContent));
 console.log("Your Chips Element:", yourChips);
 console.log("Your Bet Amount Element:", yourBetAmount);
@@ -283,7 +292,7 @@ function setWagerContents() {
         button.disabled = false;
         
         button.addEventListener('click', handleWagerButtonClick);
-       if(yourChipsValue <= parseInt(amountDeposited.textContent *.02)) {
+       if(yourChipsValue <= parseInt(amountDeposited.textContent *.02) || yourChipsValue <= 20) {
         button.textContent = yourChipsValue
        }
        console.log(amountDeposited)
@@ -312,6 +321,8 @@ function handleWagerButtonClick(event) {
         hitButton.disabled = false;
         standButton.disabled = false;
         cashOutButton.disabled = true;
+        resetWagerButton.disabled=false;
+        newHandButton.disabled =true;
         if(wagerButton.disabled === true){
             wagerRange.style.display = "none";
         }
@@ -337,7 +348,7 @@ function handleResetWagerButtonClick() {
     yourChips.textContent = returnedChips;
     yourBetAmount.textContent = parseInt(0)
     console.log("returned chips:",returnedChips)
-    newHandButton.disabled = false;
+    newHandButton.disabled = true;
     hitButton.disabled = true;
     standButton.disabled = true;
     cashOutButton.disabled =false;
@@ -523,6 +534,9 @@ if(amountDepositedText){
     playerDeposit.removeChild(amountDepositedText)
     startButton.textContent = "Deposit and Continue"
 }
+allDepositButtons.forEach(button => {
+    button.disabled =false;
+})
 
 
 
@@ -555,6 +569,14 @@ function checkPlayerDealerBust() {
     amountDeposited.textContent = 0
 
  }
+
+ function disableDepositButtons() {
+    allDepositButtons.forEach(button => {
+        button.disabled = true;
+    });
+}
+
+
 
  startOverButton.addEventListener('click',gameOver)
 
