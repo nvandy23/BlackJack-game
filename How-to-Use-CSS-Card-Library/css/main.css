@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin:0;
+  padding:0;
 }
 
 body {
@@ -122,4 +124,58 @@ button:disabled {
 .game--over{
   display: none;
   font-size: 100px;
+}
+
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  #start--screen--header {
+    font-size: 2rem;
+  }
+
+  #player--deposit--container, .game--board--container {
+    width: 90%;
+  }
+
+  .card {
+    width: 60px;
+    height: 80px;
+  }
+
+
+  .all--deposit--buttons button, #hit--button, #stand--button {
+    font-size: 1.2rem;
+  }
+}
+
+\
+@media (max-width: 767px) {
+  #start--screen--header {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .start--screen, .game--board--container, .cash--out--container, .game--over--container {
+    padding: 10px;
+  }
+
+  #player--deposit--container {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .all--deposit--buttons button, #hit--button, #stand--button {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+
+  .card {
+    width: 50px;
+    height: 70px;
+  }
+
+  #start--button, #reset--wager--button, #cash--out--button {
+    font-size: 1rem;
+    padding: 10px;
+  }
 }

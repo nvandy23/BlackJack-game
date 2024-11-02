@@ -91,9 +91,7 @@ function handleDepositClick() {
         yourChips.textContent =parseDepositAmount += remainingChips
         if(cashedOutChips.textContent >= 10000) {
             cashedOutChips.textContent = 10000
-            allDepositButtons.forEach(button => {
-                button.disabled =true;
-            })
+            enableDepositButtons()
         }
         amountDepositedText.textContent = `Chips remaining: ${yourChips.textContent}`;
         yourChips.textContent = cashedOutChips.textContent
@@ -116,18 +114,13 @@ allDepositButtons.forEach(button => {
 resetDepositButton.addEventListener('click', function(evt) {
     amountDeposited.textContent = 0;
     customAmountInput.value = "";
-    startButton.disabled =true;
-    allDepositButtons.forEach(button => {
-        button.disabled =false;
-    })
-
+    startButton.disabled = true;
+    enableDepositButtons();
 });
 
 function handleCustomAmountInput() {
     const enteredAmount = parseInt(customAmountInput.value, 10);
-    allDepositButtons.forEach(button => {
-        button.disabled =true;
-    })
+    disableDepositButtons()
 
     if (isNaN(enteredAmount) || enteredAmount < 100) {
         customAmountInput.setCustomValidity("Please enter an amount of at least 100.");
@@ -135,12 +128,11 @@ function handleCustomAmountInput() {
     } else if (enteredAmount > 10000) {
         customAmountInput.setCustomValidity("This amount exceeds 10000.");
         startButton.disabled = true;
-    }
-     else if (cashedOutChips.textContent < 10000 || cashedOutChips.textContent >=100)
-        allDepositButtons.forEach(button => {
-            button.disabled =false;
-        })
-     else {
+    } else if (parseInt(cashedOutChips.textContent, 10) < 10000 && parseInt(cashedOutChips.textContent, 10) >= 100) {
+        enableDepositButtons();
+        customAmountInput.setCustomValidity("");
+        startButton.disabled = false;
+    } else {
         customAmountInput.setCustomValidity("");
         startButton.disabled = false;
     }
@@ -148,10 +140,9 @@ function handleCustomAmountInput() {
     if (!isNaN(enteredAmount) && enteredAmount >= 100 && enteredAmount <= 10000) {
         amountDeposited.textContent = enteredAmount;
         yourChips.textContent = enteredAmount;
-        if(startScreenText.textContent ===""){
-            yourChips.textContent = enteredAmount
-            cashedOutChips.textContent = enteredAmount
-
+        if (startScreenText.textContent === "") {
+            yourChips.textContent = enteredAmount;
+            cashedOutChips.textContent = enteredAmount;
         }
         setWagerContents();
         startButton.disabled = false;
@@ -161,6 +152,7 @@ function handleCustomAmountInput() {
 
     customAmountInput.reportValidity();
 }
+
 
 
 customAmountInput.addEventListener("input", handleCustomAmountInput);
@@ -514,9 +506,7 @@ if(amountDepositedText){
     playerDeposit.removeChild(amountDepositedText)
     startButton.textContent = "Deposit and Continue"
 }
-allDepositButtons.forEach(button => {
-    button.disabled =false;
-})
+enableDepositButtons()
 }
 addChipsButton.addEventListener('click',addChips)
 
