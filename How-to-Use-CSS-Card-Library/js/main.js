@@ -557,6 +557,3 @@ function checkPlayerDealerBust() {
 
  startOverButton.addEventListener('click',gameOver)
 
- function sum() {
-    sum +2
- }
