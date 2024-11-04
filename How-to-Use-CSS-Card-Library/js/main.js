@@ -88,7 +88,7 @@ function enableNewHandButton(){
     newHandButton.disabled =false;
 }
 function disableHitbutton() {
-    hitButton.disbled=true;
+    hitButton.disabled=true;
 }
 
 function disableStandButton(){
@@ -493,7 +493,6 @@ function resetHands() {
     hitButton.addEventListener('click', getAnotherPlayerCard);
     standButton.addEventListener('click', stand);
     yourBetAmount.textContent = 0;
-    addWagerButtonListeners();
     disableResetWagerButton();
     wagerRange.style.display = "block";
     disabledNewHandButton();
