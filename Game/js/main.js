@@ -49,7 +49,7 @@ let shuffledDeck;
 let playerSum = 0;
 let dealerSum = 0;
 let cashedOutChips = document.createElement('p')
-enableStartButton();
+disableStartButton();
 cashedOutChips.textContent = 0
 
 function enableStartButton () {
@@ -94,6 +94,14 @@ function disableHitbutton() {
 function disableStandButton(){
     standButton.disabled =true;
 }
+
+function enableWagerButtons(){
+    allWagerButtons.forEach(button => {
+        button.disabled =false;
+    })
+}
+
+
 
 
 
@@ -264,7 +272,7 @@ function startGame() {
     setWagerContents();
     disableHitbutton();
     disableStandButton();
-    disabledNewHandButton();
+    enableNewHandButton();
     disableResetWagerButton();
     enableDepositButtons();
 }
@@ -345,13 +353,13 @@ function handleWagerButtonClick(event) {
 }
 
 function handleResetWagerButtonClick() {
-    addWagerButtonListeners();
     let returnedChips = parseInt(yourChips.textContent, 10) + parseInt(yourBetAmount.textContent, 10);
     yourChips.textContent = returnedChips;
     yourBetAmount.textContent = parseInt(0)
-    disabledNewHandButton();
+    enableNewHandButton();
     disableHitbutton();
     disableStandButton();
+    enableWagerButtons();
     cashOutButton.disabled =false;
     wagerRange.style.display = "block";
     disableResetWagerButton();
@@ -495,7 +503,7 @@ function resetHands() {
     yourBetAmount.textContent = 0;
     disableResetWagerButton();
     wagerRange.style.display = "block";
-    disabledNewHandButton();
+    enableNewHandButton();
 }
 
 function cashedOut() {
